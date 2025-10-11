@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -20,7 +21,8 @@ import {
   Mail,
   Clock,
 } from "lucide-react";
-import { ImageWithFallback } from "./images/ImageWithFallback";
+import { ImageWithFallback } from "../images/ImageWithFallback";
+import { LanguageSwitcher } from "@/components/ui/common/language-switcher";
 
 interface TimeLeft {
   days: number;
@@ -30,6 +32,7 @@ interface TimeLeft {
 }
 
 export function ComingSoonPage() {
+  const t = useTranslations("ComingSoon");
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
@@ -81,52 +84,47 @@ export function ComingSoonPage() {
   const features = [
     {
       icon: Users,
-      title: "Student Management",
-      description:
-        "Comprehensive student profiles, admission workflows, and academic tracking",
+      title: t("features.studentManagement.title"),
+      description: t("features.studentManagement.description"),
       gradient: "from-blue-500 to-cyan-500",
     },
     {
       icon: Calendar,
-      title: "Smart Scheduling",
-      description:
-        "Automated timetables, resource booking, and event management",
+      title: t("features.smartScheduling.title"),
+      description: t("features.smartScheduling.description"),
       gradient: "from-purple-500 to-pink-500",
     },
     {
       icon: BarChart3,
-      title: "Advanced Analytics",
-      description:
-        "Real-time insights, performance reports, and financial dashboards",
+      title: t("features.advancedAnalytics.title"),
+      description: t("features.advancedAnalytics.description"),
       gradient: "from-orange-500 to-red-500",
     },
     {
       icon: BookOpen,
-      title: "Academic Excellence",
-      description:
-        "Grade management, curriculum planning, and learning resources",
+      title: t("features.academicExcellence.title"),
+      description: t("features.academicExcellence.description"),
       gradient: "from-green-500 to-emerald-500",
     },
     {
       icon: Shield,
-      title: "Security & Compliance",
-      description:
-        "GDPR compliance, role-based access, and comprehensive audit logs",
+      title: t("features.securityCompliance.title"),
+      description: t("features.securityCompliance.description"),
       gradient: "from-indigo-500 to-blue-500",
     },
     {
       icon: Bell,
-      title: "Communication Hub",
-      description: "Parent portals, notifications, and multi-channel messaging",
+      title: t("features.communicationHub.title"),
+      description: t("features.communicationHub.description"),
       gradient: "from-pink-500 to-rose-500",
     },
   ];
 
   const stats = [
-    { value: "50K+", label: "Students Ready" },
-    { value: "200+", label: "Schools Waiting" },
-    { value: "15+", label: "Modules" },
-    { value: "99.9%", label: "Uptime SLA" },
+    { value: "50K+", label: t("stats.studentsReady") },
+    { value: "200+", label: t("stats.schoolsWaiting") },
+    { value: "15+", label: t("stats.modules") },
+    { value: "99.9%", label: t("stats.uptimeSLA") },
   ];
 
   return (
@@ -155,14 +153,17 @@ export function ComingSoonPage() {
                 <div>
                   <h1 className="text-xl font-bold">ScholaXpert</h1>
                   <p className="text-xs text-muted-foreground">
-                    Professional School Management
+                    {t("tagline")}
                   </p>
                 </div>
               </div>
-              <Badge variant="secondary" className="gap-1">
-                <Sparkles className="h-3 w-3" />
-                Coming Soon
-              </Badge>
+              <div className="flex items-center gap-3">
+                <LanguageSwitcher />
+                <Badge variant="secondary" className="gap-1">
+                  <Sparkles className="h-3 w-3" />
+                  {t("comingSoon")}
+                </Badge>
+              </div>
             </div>
           </div>
         </motion.header>
@@ -179,16 +180,13 @@ export function ComingSoonPage() {
               >
                 <Badge className="mb-4 gap-1">
                   <Clock className="h-3 w-3" />
-                  Launching Soon
+                  {t("launchingSoon")}
                 </Badge>
                 <h1 className="text-4xl md:text-6xl font-bold leading-tight bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  The Future of School Management
+                  {t("heroTitle")}
                 </h1>
                 <p className="text-xl text-muted-foreground mt-6">
-                  A comprehensive, enterprise-grade platform designed to
-                  transform educational institutions with intelligent
-                  automation, powerful analytics, and seamless multi-tenant
-                  architecture.
+                  {t("heroDescription")}
                 </p>
               </motion.div>
 
@@ -200,10 +198,10 @@ export function ComingSoonPage() {
                 className="grid grid-cols-4 gap-4"
               >
                 {[
-                  { value: timeLeft.days, label: "Days" },
-                  { value: timeLeft.hours, label: "Hours" },
-                  { value: timeLeft.minutes, label: "Minutes" },
-                  { value: timeLeft.seconds, label: "Seconds" },
+                  { value: timeLeft.days, label: t("countdown.days") },
+                  { value: timeLeft.hours, label: t("countdown.hours") },
+                  { value: timeLeft.minutes, label: t("countdown.minutes") },
+                  { value: timeLeft.seconds, label: t("countdown.seconds") },
                 ].map((item, index) => (
                   <Card
                     key={index}
@@ -233,7 +231,7 @@ export function ComingSoonPage() {
                       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                       <Input
                         type="email"
-                        placeholder="Enter your email for early access"
+                        placeholder={t("email.placeholder")}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="pl-10 h-12"
@@ -241,7 +239,7 @@ export function ComingSoonPage() {
                       />
                     </div>
                     <Button type="submit" size="lg" className="gap-2 h-12">
-                      Notify Me
+                      {t("email.notifyMe")}
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </form>
@@ -253,12 +251,12 @@ export function ComingSoonPage() {
                   >
                     <CheckCircle2 className="h-5 w-5 text-green-600" />
                     <span className="text-green-700 dark:text-green-400">
-                      Thanks! We&apos;ll notify you when we launch.
+                      {t("email.thankYou")}
                     </span>
                   </motion.div>
                 )}
                 <p className="text-sm text-muted-foreground mt-2">
-                  Join 5,000+ educators already on the waitlist
+                  {t("email.waitlist")}
                 </p>
               </motion.div>
 
@@ -313,9 +311,11 @@ export function ComingSoonPage() {
                     <CheckCircle2 className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="font-semibold">Multi-Tenant</div>
+                    <div className="font-semibold">
+                      {t("floating.multiTenant")}
+                    </div>
                     <div className="text-sm text-muted-foreground">
-                      Architecture
+                      {t("floating.architecture")}
                     </div>
                   </div>
                 </div>
@@ -336,9 +336,11 @@ export function ComingSoonPage() {
                     <Shield className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="font-semibold">GDPR Ready</div>
+                    <div className="font-semibold">
+                      {t("floating.gdprReady")}
+                    </div>
                     <div className="text-sm text-muted-foreground">
-                      Compliant
+                      {t("floating.compliant")}
                     </div>
                   </div>
                 </div>
@@ -356,13 +358,12 @@ export function ComingSoonPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <Badge className="mb-4">Features</Badge>
+            <Badge className="mb-4">{t("features.sectionBadge")}</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Everything You Need to Manage Your Institution
+              {t("features.sectionTitle")}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A complete suite of integrated modules designed for modern
-              educational institutions
+              {t("features.sectionDescription")}
             </p>
           </motion.div>
 
@@ -403,23 +404,20 @@ export function ComingSoonPage() {
               {
                 image:
                   "https://images.unsplash.com/photo-1542725752-e9f7259b3881?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjBsZWFybmluZyUyMGJvb2tzfGVufDF8fHx8MTc1OTg3MDE4OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                title: "Comprehensive Modules",
-                description:
-                  "15+ integrated modules covering every aspect of school management",
+                title: t("highlights.comprehensiveModules.title"),
+                description: t("highlights.comprehensiveModules.description"),
               },
               {
                 image:
                   "https://images.unsplash.com/photo-1758270704534-fd9715bffc0e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbGFzc3Jvb20lMjBkaWdpdGFsJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NTk5MjE2NzJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                title: "Modern Technology",
-                description:
-                  "Built with cutting-edge tech stack for performance and reliability",
+                title: t("highlights.modernTechnology.title"),
+                description: t("highlights.modernTechnology.description"),
               },
               {
                 image:
                   "https://images.unsplash.com/photo-1528249072419-472a928b71c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBzY2hvb2wlMjBzdHVkZW50cyUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzU5OTIxNjcxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                title: "User-Centric Design",
-                description:
-                  "Intuitive interface designed for teachers, admins, and parents",
+                title: t("highlights.userCentricDesign.title"),
+                description: t("highlights.userCentricDesign.description"),
               },
             ].map((item, index) => (
               <motion.div
@@ -456,17 +454,17 @@ export function ComingSoonPage() {
                 <span className="font-semibold">ScholaXpert</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                © 2025 ScholaXpert. Building the future of education management.
+                {t("footer.copyright")}
               </p>
               <div className="flex gap-4 text-sm text-muted-foreground">
                 <a href="#" className="hover:text-primary transition-colors">
-                  Privacy
+                  {t("footer.privacy")}
                 </a>
                 <a href="#" className="hover:text-primary transition-colors">
-                  Terms
+                  {t("footer.terms")}
                 </a>
                 <a href="#" className="hover:text-primary transition-colors">
-                  Contact
+                  {t("footer.contact")}
                 </a>
               </div>
             </div>

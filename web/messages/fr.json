@@ -1,0 +1,82 @@
+{
+  "ComingSoon": {
+    "tagline": "Gestion Scolaire Professionnelle",
+    "comingSoon": "Bientôt Disponible",
+    "launchingSoon": "Lancement Prochain",
+    "heroTitle": "L'Avenir de la Gestion Scolaire",
+    "heroDescription": "Une plateforme complète de niveau entreprise conçue pour transformer les établissements éducatifs avec une automatisation intelligente, des analyses puissantes et une architecture multi-locataire transparente.",
+    "countdown": {
+      "days": "Jours",
+      "hours": "Heures",
+      "minutes": "Minutes",
+      "seconds": "Secondes"
+    },
+    "email": {
+      "placeholder": "Entrez votre email pour un accès anticipé",
+      "notifyMe": "Me Notifier",
+      "thankYou": "Merci ! Nous vous informerons lors du lancement.",
+      "waitlist": "Rejoignez plus de 5 000 éducateurs déjà sur la liste d'attente"
+    },
+    "stats": {
+      "studentsReady": "Étudiants Prêts",
+      "schoolsWaiting": "Écoles en Attente",
+      "modules": "Modules",
+      "uptimeSLA": "SLA Disponibilité"
+    },
+    "floating": {
+      "multiTenant": "Multi-Locataire",
+      "architecture": "Architecture",
+      "gdprReady": "Conforme RGPD",
+      "compliant": "Conforme"
+    },
+    "features": {
+      "sectionBadge": "Fonctionnalités",
+      "sectionTitle": "Tout ce dont vous avez besoin pour gérer votre établissement",
+      "sectionDescription": "Une suite complète de modules intégrés conçus pour les établissements éducatifs modernes",
+      "studentManagement": {
+        "title": "Gestion des Étudiants",
+        "description": "Profils étudiants complets, flux d'admission et suivi académique"
+      },
+      "smartScheduling": {
+        "title": "Planification Intelligente",
+        "description": "Emplois du temps automatisés, réservation de ressources et gestion d'événements"
+      },
+      "advancedAnalytics": {
+        "title": "Analyses Avancées",
+        "description": "Informations en temps réel, rapports de performance et tableaux de bord financiers"
+      },
+      "academicExcellence": {
+        "title": "Excellence Académique",
+        "description": "Gestion des notes, planification des programmes et ressources d'apprentissage"
+      },
+      "securityCompliance": {
+        "title": "Sécurité & Conformité",
+        "description": "Conformité RGPD, accès basé sur les rôles et journaux d'audit complets"
+      },
+      "communicationHub": {
+        "title": "Centre de Communication",
+        "description": "Portails parents, notifications et messagerie multi-canal"
+      }
+    },
+    "highlights": {
+      "comprehensiveModules": {
+        "title": "Modules Complets",
+        "description": "Plus de 15 modules intégrés couvrant tous les aspects de la gestion scolaire"
+      },
+      "modernTechnology": {
+        "title": "Technologie Moderne",
+        "description": "Construit avec une pile technologique de pointe pour performance et fiabilité"
+      },
+      "userCentricDesign": {
+        "title": "Design Centré Utilisateur",
+        "description": "Interface intuitive conçue pour les enseignants, administrateurs et parents"
+      }
+    },
+    "footer": {
+      "copyright": "© 2025 ScholaXpert. Construire l'avenir de la gestion éducative.",
+      "privacy": "Confidentialité",
+      "terms": "Conditions",
+      "contact": "Contact"
+    }
+  }
+}
