@@ -22,7 +22,7 @@ import {
   Clock,
 } from "lucide-react";
 import { ImageWithFallback } from "./images/ImageWithFallback";
-// import { LanguageSwitcher } from "./LanguageSwitcher";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 interface TimeLeft {
   days: number;
@@ -158,7 +158,7 @@ export function ComingSoonPage() {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                {/* <LanguageSwitcher /> */}
+                <LanguageSwitcher />
                 <Badge variant="secondary" className="gap-1">
                   <Sparkles className="h-3 w-3" />
                   {t("comingSoon")}
