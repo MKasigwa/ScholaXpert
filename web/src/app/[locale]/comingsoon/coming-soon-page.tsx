@@ -21,8 +21,8 @@ import {
   Mail,
   Clock,
 } from "lucide-react";
-import { ImageWithFallback } from "./images/ImageWithFallback";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import { ImageWithFallback } from "../images/ImageWithFallback";
+import { LanguageSwitcher } from "@/components/ui/common/language-switcher";
 
 interface TimeLeft {
   days: number;
