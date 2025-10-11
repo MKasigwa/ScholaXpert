@@ -1,0 +1,82 @@
+{
+  "ComingSoon": {
+    "tagline": "Professional School Management",
+    "comingSoon": "Coming Soon",
+    "launchingSoon": "Launching Soon",
+    "heroTitle": "The Future of School Management",
+    "heroDescription": "A comprehensive, enterprise-grade platform designed to transform educational institutions with intelligent automation, powerful analytics, and seamless multi-tenant architecture.",
+    "countdown": {
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    },
+    "email": {
+      "placeholder": "Enter your email for early access",
+      "notifyMe": "Notify Me",
+      "thankYou": "Thanks! We'll notify you when we launch.",
+      "waitlist": "Join 5,000+ educators already on the waitlist"
+    },
+    "stats": {
+      "studentsReady": "Students Ready",
+      "schoolsWaiting": "Schools Waiting",
+      "modules": "Modules",
+      "uptimeSLA": "Uptime SLA"
+    },
+    "floating": {
+      "multiTenant": "Multi-Tenant",
+      "architecture": "Architecture",
+      "gdprReady": "GDPR Ready",
+      "compliant": "Compliant"
+    },
+    "features": {
+      "sectionBadge": "Features",
+      "sectionTitle": "Everything You Need to Manage Your Institution",
+      "sectionDescription": "A complete suite of integrated modules designed for modern educational institutions",
+      "studentManagement": {
+        "title": "Student Management",
+        "description": "Comprehensive student profiles, admission workflows, and academic tracking"
+      },
+      "smartScheduling": {
+        "title": "Smart Scheduling",
+        "description": "Automated timetables, resource booking, and event management"
+      },
+      "advancedAnalytics": {
+        "title": "Advanced Analytics",
+        "description": "Real-time insights, performance reports, and financial dashboards"
+      },
+      "academicExcellence": {
+        "title": "Academic Excellence",
+        "description": "Grade management, curriculum planning, and learning resources"
+      },
+      "securityCompliance": {
+        "title": "Security & Compliance",
+        "description": "GDPR compliance, role-based access, and comprehensive audit logs"
+      },
+      "communicationHub": {
+        "title": "Communication Hub",
+        "description": "Parent portals, notifications, and multi-channel messaging"
+      }
+    },
+    "highlights": {
+      "comprehensiveModules": {
+        "title": "Comprehensive Modules",
+        "description": "15+ integrated modules covering every aspect of school management"
+      },
+      "modernTechnology": {
+        "title": "Modern Technology",
+        "description": "Built with cutting-edge tech stack for performance and reliability"
+      },
+      "userCentricDesign": {
+        "title": "User-Centric Design",
+        "description": "Intuitive interface designed for teachers, admins, and parents"
+      }
+    },
+    "footer": {
+      "copyright": "© 2025 ScholaXpert. Building the future of education management.",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "contact": "Contact"
+    }
+  }
+}
