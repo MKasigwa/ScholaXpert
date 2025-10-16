@@ -13,6 +13,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { WaitlistModule } from './modules/waitlist/waitlist.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
+import { EmailModule } from './modules/email/email.module';
 
 @Module({
   imports: [
@@ -68,6 +71,12 @@ import { WaitlistModule } from './modules/waitlist/waitlist.module';
 
     // Feature modules
     WaitlistModule,
+
+    AuthModule,
+
+    UsersModule,
+
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [AppService],
