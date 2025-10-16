@@ -12,6 +12,7 @@ import appConfig from './config/app.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { WaitlistModule } from './modules/waitlist/waitlist.module';
 
 @Module({
   imports: [
@@ -66,6 +67,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
     ]),
 
     // Feature modules
+    WaitlistModule,
   ],
   controllers: [AppController],
   providers: [AppService],
