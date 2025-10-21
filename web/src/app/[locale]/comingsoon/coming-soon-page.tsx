@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
 import {
   GraduationCap,
   Users,
@@ -20,9 +21,14 @@ import {
   CheckCircle2,
   Mail,
   Clock,
+  Play,
+  AlertCircle,
 } from "lucide-react";
 import { ImageWithFallback } from "../images/ImageWithFallback";
 import { LanguageSwitcher } from "@/components/ui/common/language-switcher";
+import { buildSubscribeData, useWaitlistSubscribe } from "@/hooks/useWaitlist";
+import { Link } from "@/i18n/navigation";
+import { Locale } from "@/i18n/routing";
 
 interface TimeLeft {
   days: number;
@@ -33,8 +39,10 @@ interface TimeLeft {
 
 export function ComingSoonPage() {
   const t = useTranslations("ComingSoon");
+  const locale = useLocale() as Locale;
   const [email, setEmail] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { subscribe, isLoading, isSubmitted, isError, error, reset } =
+    useWaitlistSubscribe();
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 45,
     hours: 12,
@@ -72,12 +80,29 @@ export function ComingSoonPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setEmail("");
-        setIsSubmitted(false);
-      }, 3000);
+
+    try {
+      const subscribeData = buildSubscribeData(email.trim(), locale);
+
+      subscribe(subscribeData, {
+        onSuccess: () => {
+          toast.success(t("email.thankYou"));
+          setEmail("");
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onError: (error: any) => {
+          // Handle conflict error (email already subscribed)
+          if (error?.response?.status === 409) {
+            toast.info("This email is already on the waitlist!");
+          } else {
+            toast.error("Failed to subscribe. Please try again.");
+          }
+          console.error("Subscription error:", error);
+        },
+      });
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      toast.error("An unexpected error occurred");
     }
   };
 
@@ -226,23 +251,76 @@ export function ComingSoonPage() {
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
                 {!isSubmitted ? (
-                  <form onSubmit={handleSubmit} className="flex gap-2">
-                    <div className="relative flex-1">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                      <Input
-                        type="email"
-                        placeholder={t("email.placeholder")}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="pl-10 h-12"
-                        required
-                      />
+                  <div className="space-y-4">
+                    <form onSubmit={handleSubmit} className="space-y-2">
+                      <div className="flex gap-2">
+                        <div className="relative flex-1">
+                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                          <Input
+                            type="email"
+                            placeholder={t("email.placeholder")}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="pl-10 h-12"
+                            required
+                            disabled={isLoading}
+                          />
+                        </div>
+                        <Button
+                          type="submit"
+                          size="lg"
+                          className="gap-2 h-12"
+                          disabled={isLoading}
+                        >
+                          {isLoading ? (
+                            <>
+                              <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{
+                                  duration: 1,
+                                  repeat: Infinity,
+                                  ease: "linear",
+                                }}
+                              >
+                                <Clock className="h-4 w-4" />
+                              </motion.div>
+                              <span>Sending...</span>
+                            </>
+                          ) : (
+                            <>
+                              {t("email.notifyMe")}
+                              <ArrowRight className="h-4 w-4" />
+                            </>
+                          )}
+                        </Button>
+                      </div>
+                      {isError && (
+                        <div className="flex items-center gap-2 text-sm text-destructive">
+                          <AlertCircle className="h-4 w-4" />
+                          <span>Failed to subscribe. Please try again.</span>
+                        </div>
+                      )}
+                    </form>
+
+                    {/* Demo Button */}
+                    <div className="flex items-center gap-3">
+                      <div className="flex-1 border-t border-border/50" />
+                      <span className="text-xs text-muted-foreground">or</span>
+                      <div className="flex-1 border-t border-border/50" />
                     </div>
-                    <Button type="submit" size="lg" className="gap-2 h-12">
-                      {t("email.notifyMe")}
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </form>
+
+                    <Link href={"auth/sign-in"}>
+                      <Button
+                        // onClick={() => navigate("/login")}
+                        variant="outline"
+                        size="lg"
+                        className="w-full h-12 gap-2 border-2 hover:bg-primary/5 hover:border-primary transition-all"
+                      >
+                        <Play className="h-5 w-5" />
+                        <span className="font-semibold">Try Demo</span>
+                      </Button>
+                    </Link>
+                  </div>
                 ) : (
                   <motion.div
                     initial={{ scale: 0.9, opacity: 0 }}
