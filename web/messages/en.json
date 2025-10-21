@@ -78,5 +78,110 @@
       "terms": "Terms",
       "contact": "Contact"
     }
+  },
+   "SignUp": {
+    "appName": "ScholaXpert",
+    "tagline": "Create your account",
+    "title": "Sign Up",
+    "description": "Enter your details to create a new account",
+    "form": {
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "John",
+        "required": "First name is required"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Doe",
+        "required": "Last name is required"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "you@example.com",
+        "required": "Email is required",
+        "invalid": "Invalid email format",
+        "exists": "This email is already registered"
+      },
+      "phoneNumber": {
+        "label": "Phone Number (Optional)",
+        "placeholder": "+1234567890"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "••••••••",
+        "required": "Password is required",
+        "minLength": "Password must be at least 8 characters",
+        "requirements": "Password must contain uppercase, lowercase, number, and special character",
+        "strength": {
+          "weak": "Weak",
+          "fair": "Fair",
+          "good": "Good",
+          "strong": "Strong",
+          "veryStrong": "Very Strong"
+        }
+      },
+      "confirmPassword": {
+        "label": "Confirm Password",
+        "placeholder": "••••••••",
+        "mismatch": "Passwords do not match"
+      }
+    },
+    "passwordRequirements": "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.",
+    "submitButton": {
+      "creating": "Creating Account...",
+      "create": "Create Account"
+    },
+    "footer": {
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in"
+    },
+    "terms": "By creating an account, you agree to our Terms of Service and Privacy Policy",
+    "toast": {
+      "success": "Account created successfully!",
+      "error": "Échec de l'inscription. Veuillez réessayer."
+    }
+  },
+   "Login": {
+    "appName": "ScholaXpert",
+    "tagline": "Welcome back! Please sign in to continue",
+    "title": "Sign In",
+    "description": "Enter your credentials to access your account",
+    "form": {
+      "email": {
+        "label": "Email",
+        "placeholder": "you@example.com",
+        "required": "Email is required",
+        "invalid": "Invalid email format"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "••••••••",
+        "required": "Password is required",
+        "forgotPassword": "Forgot password?"
+      },
+      "rememberMe": "Remember me"
+    },
+    "submitButton": {
+      "signingIn": "Signing in...",
+      "signIn": "Sign In"
+    },
+    "footer": {
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    },
+    "demoNote": "Demo Credentials: Use any email and password that meets requirements to test the system",
+    "copyright": "© 2025 ScholaXpert. All rights reserved.",
+    "toast": {
+      "success": "Login successful!",
+      "error": "Login failed. Please try again.",
+      "invalidCredentials": "Invalid email or password",
+      "accountLocked": "Your account has been locked",
+      "accountSuspended": "Your account has been suspended"
+    },
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "accountLocked": "Account locked",
+      "accountSuspended": "Account suspended"
+    }
   }
 }

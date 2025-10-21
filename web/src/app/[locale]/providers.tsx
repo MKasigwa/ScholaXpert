@@ -1,4 +1,5 @@
 "use client";
+import { AuthProvider } from "@/contexts/auth-context";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import { SessionProvider } from "next-auth/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -25,7 +26,7 @@ export function Providers({
           enableSystem
           disableTransitionOnChange
         > */}
-      {children}
+      <AuthProvider>{children}</AuthProvider>
       {/* </ThemeProvider> */}
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
