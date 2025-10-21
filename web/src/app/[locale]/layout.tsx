@@ -4,6 +4,7 @@ import "./globals.css";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { Providers } from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,9 +24,11 @@ export const metadata: Metadata = {
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  session: any;
 };
 
-export default async function RootLayout({ children, params }: Props) {
+export default async function RootLayout({ children, params, session }: Props) {
   // Ensure that the incoming `locale` is valid
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
@@ -37,7 +40,9 @@ export default async function RootLayout({ children, params }: Props) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <Providers session={session}>{children}</Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
