@@ -36,6 +36,7 @@ import { CommunicationIntegration } from './entities/communication-integration.e
 import { AnalyticsIntegration } from './entities/analytics-integration.entity';
 import { SsoIntegration } from './entities/sso-integration.entity';
 import { CustomIntegration } from './entities/custom-integration.entity';
+import { User } from '../users/entities/user.entity';
 
 @Module({
   imports: [
@@ -48,6 +49,9 @@ import { CustomIntegration } from './entities/custom-integration.entity';
       ContactPerson,
       Address,
       TenantLocation,
+
+      // User entity (for tenant assignment)
+      User,
 
       // School information entities
       SchoolInfo,

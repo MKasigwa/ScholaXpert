@@ -3,6 +3,7 @@ import {
   NotFoundException,
   ConflictException,
   InternalServerErrorException,
+  BadRequestException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
@@ -20,7 +21,12 @@ import { TenantContactInfo } from './entities/contact-info.entity';
 import { ContactPerson } from './entities/contact-person.entity';
 import { Address } from './entities/address.entity';
 import { TenantLocation } from './entities/tenant-location.entity';
-import { SchoolInfo } from './entities/school-info.entity';
+import {
+  AcademicCalendarType,
+  SchoolCategory,
+  SchoolInfo,
+  SchoolType,
+} from './entities/school-info.entity';
 import { AccreditationInfo } from './entities/accreditation-info.entity';
 import {
   TenantSubscription,
@@ -59,7 +65,7 @@ import { CommunicationIntegration } from './entities/communication-integration.e
 import { AnalyticsIntegration } from './entities/analytics-integration.entity';
 import { SsoIntegration } from './entities/sso-integration.entity';
 import { CustomIntegration } from './entities/custom-integration.entity';
-
+import { User, UserRole } from '../users/entities/user.entity';
 import {
   AccreditationInfoDto,
   AddressDto,
@@ -73,6 +79,7 @@ import {
 } from './dto/update-tenant.dto';
 import { TenantQueryDto } from './dto/tenant-query.dto';
 import { PaginatedResponseDto } from '../../common/dto/paginated-response.dto';
+import { CreateTenantMinimalDto } from './dto/create-tenant-minimal.dto';
 
 @Injectable()
 export class TenantsService {
@@ -141,6 +148,8 @@ export class TenantsService {
     private readonly ssoIntegrationRepository: Repository<SsoIntegration>,
     @InjectRepository(CustomIntegration)
     private readonly customIntegrationRepository: Repository<CustomIntegration>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
     private readonly dataSource: DataSource,
   ) {}
 
@@ -1763,5 +1772,443 @@ export class TenantsService {
       default:
         return TenantLifecycleStage.PROSPECT;
     }
+  }
+
+  async createMinimal(
+    createDto: CreateTenantMinimalDto,
+    userId?: string,
+  ): Promise<{ tenant: Tenant; user?: User }> {
+    if (!userId) {
+      throw new NotFoundException('UserId not provided');
+    }
+
+    // Check for unique email
+    const existingByEmail = await this.contactInfoRepository.findOne({
+      where: { email: createDto.email },
+    });
+
+    if (existingByEmail) {
+      throw new ConflictException('Tenant with this email already exists');
+    }
+
+    // Generate slug from name
+    const slug = createDto.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+
+    // Check if slug already exists
+    const existingBySlug = await this.tenantRepository.findOne({
+      where: { slug },
+    });
+
+    if (existingBySlug) {
+      throw new ConflictException('Tenant with this name already exists');
+    }
+
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      // Create minimal tenant using helper method
+      const tenant = await this.createMinimalTenant(
+        createDto,
+        slug,
+        queryRunner,
+      );
+
+      // Assign user to tenant as ADMIN if userId provided
+      let updatedUser: User | undefined;
+      if (userId) {
+        const user = await this.userRepository.findOne({
+          where: { id: userId },
+        });
+
+        if (user) {
+          // Check if user already has a tenant
+          if (user.tenantId) {
+            await queryRunner.rollbackTransaction();
+            throw new ConflictException('User already belongs to a tenant');
+          }
+
+          // Check if email is verified
+          if (!user.emailVerified) {
+            await queryRunner.rollbackTransaction();
+            throw new BadRequestException(
+              'Email must be verified to create a tenant',
+            );
+          }
+
+          // Update user's tenant and role
+          user.tenantId = tenant.id;
+          user.role = UserRole.ADMIN;
+          updatedUser = await queryRunner.manager.save(User, user);
+
+          console.log(
+            `User ${user.email} assigned as ADMIN of tenant ${tenant.name}`,
+          );
+        }
+      }
+
+      await queryRunner.commitTransaction();
+
+      // Return tenant with all relations loaded
+      const fullTenant = await this.findOne(tenant.id);
+      return {
+        tenant: fullTenant,
+        user: updatedUser,
+      };
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      throw new InternalServerErrorException(
+        `Failed to create tenant: ${error}`,
+      );
+    } finally {
+      await queryRunner.release();
+    }
+  }
+
+  /**
+   * Helper method to create a minimal tenant with default values
+   * This is separated from createTenantWithRelations to avoid requiring full DTO
+   */
+  private async createMinimalTenant(
+    createDto: CreateTenantMinimalDto,
+    slug: string,
+    queryRunner: QueryRunner,
+  ): Promise<Tenant> {
+    // 1. Create Address
+    const address = queryRunner.manager.create(Address, {
+      street1: createDto.street || 'Not provided',
+      street2: undefined,
+      city: createDto.city || 'Not provided',
+      state: createDto.state || 'Not provided',
+      postalCode: createDto.postalCode || '00000',
+      country: createDto.country || 'Not provided',
+      latitude: undefined,
+      longitude: undefined,
+    });
+    await queryRunner.manager.save(Address, address);
+
+    // 2. Create Contact Person
+    const primaryContact = queryRunner.manager.create(ContactPerson, {
+      name: 'Administrator',
+      title: 'Administrator',
+      email: createDto.email,
+      phone: createDto.phone,
+      department: undefined,
+    });
+    await queryRunner.manager.save(ContactPerson, primaryContact);
+
+    // 3. Create Contact Info
+    const contactInfo = queryRunner.manager.create(TenantContactInfo, {
+      primaryContact,
+      billingContact: undefined,
+      technicalContact: undefined,
+      emergencyContact: undefined,
+      phone: createDto.phone,
+      email: createDto.email,
+      website: undefined,
+      address,
+    });
+    await queryRunner.manager.save(TenantContactInfo, contactInfo);
+
+    // 4. Create Location
+    const location = queryRunner.manager.create(TenantLocation, {
+      timezone: 'UTC',
+      locale: 'en_US',
+      currency: 'USD',
+      region: createDto.state || 'Not specified',
+      country: createDto.country || 'Not specified',
+      address,
+    });
+    await queryRunner.manager.save(TenantLocation, location);
+
+    // 5. Create School Info
+    const schoolInfo = queryRunner.manager.create(SchoolInfo, {
+      type: SchoolType.PUBLIC,
+      category: SchoolCategory.ELEMENTARY,
+      levels: ['elementary' as any],
+      foundedYear: undefined,
+      principalName: undefined,
+      studentCapacity: 100,
+      currentEnrollment: 0,
+      staffCount: 0,
+      accreditation: [],
+      academicCalendar: AcademicCalendarType.SEMESTER,
+      languagesOffered: ['English'],
+      specialPrograms: [],
+    });
+    await queryRunner.manager.save(SchoolInfo, schoolInfo);
+
+    // 6. Create Feature Limits (for subscription)
+    const featureLimits = queryRunner.manager.create(FeatureLimits, {
+      customBranding: false,
+      apiAccess: false,
+      ssoIntegration: false,
+      advancedReports: false,
+      mobileApp: false,
+      parentPortal: true,
+      studentPortal: true,
+      bulkOperations: false,
+      dataExport: false,
+      automatedBackups: false,
+      prioritySupport: false,
+      dedicatedAccountManager: false,
+    });
+    await queryRunner.manager.save(FeatureLimits, featureLimits);
+
+    // 7. Create Subscription Limits
+    const subscriptionLimits = queryRunner.manager.create(SubscriptionLimits, {
+      maxUsers: 10,
+      maxStudents: 100,
+      maxStorage: 5,
+      maxApiCalls: 1000,
+      maxSchoolYears: 2,
+      maxClasses: 10,
+      features: featureLimits,
+    });
+    await queryRunner.manager.save(SubscriptionLimits, subscriptionLimits);
+
+    // 8. Create Billing Info
+    const billingInfo = queryRunner.manager.create(BillingInfo, {
+      method: PaymentMethod.CREDIT_CARD,
+      status: BillingStatus.PENDING,
+      nextBillingDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      lastPaymentDate: undefined,
+      lastPaymentAmount: undefined,
+      outstandingBalance: 0,
+      billingHistory: [],
+    });
+    await queryRunner.manager.save(BillingInfo, billingInfo);
+
+    // 9. Create Trial Info
+    const trialInfo = queryRunner.manager.create(TrialInfo, {
+      isTrialActive: true,
+      trialStartDate: new Date(),
+      trialEndDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      trialDaysRemaining: 30,
+      trialPlan: SubscriptionPlan.STARTER,
+      convertedFromTrial: false,
+      conversionDate: undefined,
+      extensionsUsed: 0,
+      maxExtensions: 2,
+    });
+    await queryRunner.manager.save(TrialInfo, trialInfo);
+
+    // 10. Create Subscription
+    const subscription = queryRunner.manager.create(TenantSubscription, {
+      plan: SubscriptionPlan.STARTER,
+      status: SubscriptionStatus.TRIAL,
+      billingCycle: BillingCycle.MONTHLY,
+      startDate: new Date(),
+      endDate: undefined,
+      renewalDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      basePrice: 29.99,
+      additionalUserPrice: 2.99,
+      totalPrice: 29.99,
+      discountPercent: undefined,
+      discountAmount: undefined,
+      currency: 'USD',
+      paymentStatus: 'pending',
+      autoRenewal: true,
+      gracePeriodDays: 7,
+      usageTracking: true,
+      overageCharges: false,
+      limits: subscriptionLimits,
+      billing: billingInfo,
+      trial: trialInfo,
+    });
+    await queryRunner.manager.save(TenantSubscription, subscription);
+
+    // 11. Create Password Policy
+    const passwordPolicy = queryRunner.manager.create(PasswordPolicy, {
+      minLength: 8,
+      requireUppercase: true,
+      requireLowercase: true,
+      requireNumbers: true,
+      requireSpecialChars: true,
+      prohibitCommonPasswords: true,
+      passwordExpiry: 90,
+      passwordHistory: 5,
+    });
+    await queryRunner.manager.save(PasswordPolicy, passwordPolicy);
+
+    // 12. Create System Settings
+    const systemSettings = queryRunner.manager.create(SystemSettings, {
+      maintenanceMode: false,
+      debugMode: false,
+      allowRegistration: true,
+      requireEmailVerification: true,
+      sessionTimeout: 480,
+      passwordPolicy,
+      defaultLanguage: 'en',
+      defaultTimezone: 'UTC',
+      dateFormat: 'YYYY-MM-DD',
+      timeFormat: '24h',
+      currency: 'USD',
+      backupFrequency: BackupFrequency.NEVER,
+      dataRetentionPeriod: 2555,
+    });
+    await queryRunner.manager.save(SystemSettings, systemSettings);
+
+    // 13. Create Tenant Features
+    const features = queryRunner.manager.create(TenantFeatures, {
+      academicManagement: true,
+      feeManagement: true,
+      libraryManagement: false,
+      transportManagement: false,
+      inventoryManagement: false,
+      hrManagement: false,
+      parentPortal: true,
+      studentPortal: true,
+      mobileApp: false,
+      reportsAnalytics: false,
+      timetableManagement: true,
+      communicationTools: true,
+      examManagement: true,
+      disciplineTracking: false,
+      healthRecords: false,
+      customFields: false,
+      apiAccess: false,
+      ssoIntegration: false,
+      customBranding: false,
+      advancedSecurity: false,
+    });
+    await queryRunner.manager.save(TenantFeatures, features);
+
+    // 14. Create Tenant Limits
+    const tenantLimits = queryRunner.manager.create(TenantLimits, {
+      maxUsers: 10,
+      maxStudents: 100,
+      maxStaff: 20,
+      maxClasses: 10,
+      maxSubjects: 20,
+      storageQuota: 5,
+      monthlyApiCalls: 1000,
+      dailyEmailLimit: 100,
+      concurrentSessions: 50,
+    });
+    await queryRunner.manager.save(TenantLimits, tenantLimits);
+
+    // 15. Create Customizations
+    const customizations = queryRunner.manager.create(TenantCustomizations, {
+      allowCustomFields: false,
+      customFieldsLimit: 50,
+      allowWorkflowCustomization: false,
+      allowReportCustomization: false,
+      allowUICustomization: false,
+      customModules: [],
+    });
+    await queryRunner.manager.save(TenantCustomizations, customizations);
+
+    // 16. Create API Settings
+    const apiSettings = queryRunner.manager.create(ApiSettings, {
+      enabled: false,
+      version: '1.0',
+      rateLimit: 1000,
+      allowedOrigins: [],
+      webhookEndpoints: [],
+      apiKeys: [],
+    });
+    await queryRunner.manager.save(ApiSettings, apiSettings);
+
+    // 17. Create Configuration
+    const configuration = queryRunner.manager.create(TenantConfiguration, {
+      systemSettings,
+      features,
+      limits: tenantLimits,
+      customizations,
+      apiSettings,
+    });
+    await queryRunner.manager.save(TenantConfiguration, configuration);
+
+    // 18. Create Compliance Info
+    const compliance = queryRunner.manager.create(ComplianceInfo, {
+      gdprCompliant: true,
+      ferpaCompliant: false,
+      hipaaCompliant: false,
+      coppaCompliant: false,
+      dataProcessingAddendum: true,
+      privacyShieldCertified: false,
+      iso27001Certified: false,
+      soc2Compliant: false,
+      rightToErasure: true,
+      dataPortability: true,
+      consentManagement: true,
+      certifications: [],
+    });
+    await queryRunner.manager.save(ComplianceInfo, compliance);
+
+    // 19. Create Security Settings
+    const security = queryRunner.manager.create(SecuritySettings, {
+      twoFactorEnabled: false,
+      twoFactorEnforced: false,
+      ipWhitelisting: false,
+      sessionManagement: true,
+      auditLogging: true,
+      encryptionAtRest: true,
+      encryptionInTransit: true,
+      allowedIps: [],
+      blockedIps: [],
+      securityNotifications: true,
+      passwordResetRequired: false,
+      lastSecurityAudit: new Date(),
+      securityIncidents: [],
+    });
+    await queryRunner.manager.save(SecuritySettings, security);
+
+    // 20. Create Usage Tracking
+    const usage = queryRunner.manager.create(TenantUsage, {
+      storageUsed: 0,
+      apiCallsThisMonth: 0,
+      activeUsers: 0,
+      totalStudents: 0,
+      totalStaff: 0,
+      totalClasses: 0,
+      lastActivityDate: new Date(),
+      peakConcurrentUsers: 0,
+    });
+    await queryRunner.manager.save(TenantUsage, usage);
+
+    // 21. Create Integrations
+    const integrations = queryRunner.manager.create(TenantIntegrations, {
+      lmsIntegrations: [],
+      paymentGateways: [],
+      communicationTools: [],
+      analyticsIntegrations: [],
+      ssoConfigurations: [],
+      customIntegrations: [],
+    });
+    await queryRunner.manager.save(TenantIntegrations, integrations);
+
+    // 22. Create Main Tenant
+    const tenant = queryRunner.manager.create(Tenant, {
+      name: createDto.name,
+      slug,
+      displayName: createDto.name,
+      description: `Created on ${new Date().toLocaleDateString()}`,
+      status: TenantStatus.ACTIVE,
+      lifecycleStage: TenantLifecycleStage.ONBOARDING,
+      tags: [],
+      metadata: {
+        createdMinimal: true,
+        code: createDto.code,
+        createdDate: new Date().toISOString(),
+      },
+      contactInfo,
+      location,
+      schoolInfo,
+      subscription,
+      configuration,
+      compliance,
+      security,
+      usage,
+      integrations,
+      branding: undefined, // Will be created later if needed
+    });
+
+    return queryRunner.manager.save(Tenant, tenant);
   }
 }

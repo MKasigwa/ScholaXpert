@@ -51,14 +51,14 @@ export class CoordinatesDto {
 }
 
 export class AddressDto {
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'Street address line 1',
     example: '123 Main Street',
   })
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   @Length(1, 255)
-  street1: string;
+  street1?: string;
 
   @ApiPropertyOptional({
     description: 'Street address line 2',
@@ -81,11 +81,11 @@ export class AddressDto {
   @Length(1, 100)
   state: string;
 
-  @ApiProperty({ description: 'Postal or ZIP code', example: '62704' })
+  @ApiPropertyOptional({ description: 'Postal or ZIP code', example: '62704' })
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   @Length(1, 20)
-  postalCode: string;
+  postalCode?: string;
 
   @ApiProperty({ description: 'Country', example: 'United States' })
   @IsString()

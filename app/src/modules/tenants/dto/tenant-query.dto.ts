@@ -62,7 +62,20 @@ export class TenantQueryDto extends BaseQueryDto {
   @IsString()
   subscriptionStatus?: string;
 
+  @ApiPropertyOptional({
+    description: 'Filter by region',
+    example: 'active',
+  })
+  @IsOptional()
+  @IsString()
   region?: string;
+
+  @ApiPropertyOptional({
+    description: 'Filter by schoolType',
+    example: 'active',
+  })
+  @IsOptional()
+  @IsString()
   schoolType?: string;
 
   @ApiPropertyOptional({
@@ -132,6 +145,11 @@ export class TenantQueryDto extends BaseQueryDto {
   @IsString()
   state?: string;
 
+  @IsOptional()
+  @IsEnum(TenantLifecycleStage)
   lifecycleStage?: TenantLifecycleStage;
+
+  @IsOptional()
+  @IsEnum(TenantSubscription)
   subscriptionPlan?: TenantSubscription;
 }
