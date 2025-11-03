@@ -48,18 +48,91 @@ export interface UserResponseDto {
   phoneNumber?: string;
   role: UserRole;
   status: UserStatus;
-  tenantId?: string;
+  tenantId: string;
   avatar?: string;
   department?: string;
   designation?: string;
   emailVerified: boolean;
+  hasPendingRequest: boolean;
+  pendingRequestId: string;
   lastLoginAt?: Date;
   createdAt: Date;
 }
 
 export interface AuthResponseDto {
-  accessToken: string;
-  refreshToken?: string;
-  user: UserResponseDto;
+  sucess: boolean;
+  data: {
+    accessToken: string;
+    refreshToken?: string;
+    user: UserResponseDto;
+    expiresIn: number;
+  };
+  timestamp: Date;
+}
+
+export interface ResendCodeResponseDto {
+  success: boolean;
+  message: string;
   expiresIn: number;
+}
+
+export interface VerifyEmailDto {
+  email: string;
+  code: string;
+}
+
+export interface ResendVerificationCodeDto {
+  email: string;
+}
+
+export interface VerifyEmailResponseDto {
+  success: boolean;
+  message: string;
+  user?: {
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    emailVerified: boolean;
+    emailVerifiedAt?: Date;
+  };
+}
+
+// Forgot Password Types
+export interface ForgotPasswordDto {
+  email: string;
+}
+
+export interface ForgotPasswordResponseDto {
+  success: boolean;
+  message: string;
+  expiresIn?: number;
+}
+
+export interface VerifyResetCodeDto {
+  email: string;
+  code: string;
+}
+
+export interface VerifyResetCodeResponseDto {
+  success: boolean;
+  message: string;
+  token?: string;
+}
+
+export interface ResetPasswordDto {
+  email: string;
+  code: string;
+  newPassword: string;
+}
+
+export interface ResetPasswordResponseDto {
+  success: boolean;
+  message: string;
+  user?: {
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+  };
 }
