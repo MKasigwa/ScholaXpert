@@ -17,6 +17,9 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { EmailModule } from './modules/email/email.module';
 import { TenantsModule } from './modules/tenants/tenants.module';
+import { TenantAccessController } from './modules/tenant-access/tenant-access.controller';
+import { TenantAccessModule } from './modules/tenant-access/tenant-access.module';
+import { SchoolYearsModule } from './modules/school-years/school-years.module';
 
 @Module({
   imports: [
@@ -80,8 +83,12 @@ import { TenantsModule } from './modules/tenants/tenants.module';
     EmailModule,
 
     TenantsModule,
+
+    TenantAccessModule,
+
+    SchoolYearsModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, TenantAccessController],
   providers: [AppService],
 })
 export class AppModule {}

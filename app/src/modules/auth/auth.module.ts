@@ -8,6 +8,7 @@ import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { User } from '../users/entities/user.entity';
 import { EmailModule } from '../email/email.module';
+import { TenantAccessModule } from '../tenant-access/tenant-access.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { EmailModule } from '../email/email.module';
       inject: [ConfigService],
     }),
     EmailModule,
+    TenantAccessModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],

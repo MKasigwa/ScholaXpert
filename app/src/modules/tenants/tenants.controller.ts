@@ -10,6 +10,7 @@ import {
   ParseUUIDPipe,
   HttpStatus,
   HttpCode,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -23,8 +24,13 @@ import { TenantsService } from './tenants.service';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
 import { TenantQueryDto } from './dto/tenant-query.dto';
-import { TenantResponseDto, TenantSummaryDto } from './dto/tenant-response.dto';
+import { TenantResponseDto } from './dto/tenant-response.dto';
 import { PaginatedResponseDto } from '../../common/dto/paginated-response.dto';
+import { CreateTenantMinimalDto } from './dto/create-tenant-minimal.dto';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { CurrentUserDto } from 'src/common/dto/current-user.dto';
+import { TenantSummaryDto } from './dto/tenant-summary.dto';
 // import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 // import { RolesGuard } from '../auth/guards/roles.guard';
 // import { Roles } from '../auth/decorators/roles.decorator';
@@ -59,6 +65,55 @@ export class TenantsController {
   ): Promise<TenantResponseDto> {
     const tenant = await this.tenantsService.create(createTenantDto);
     return TenantResponseDto.fromEntity(tenant);
+  }
+
+  @Post('minimal')
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({
+    summary: 'Create a new tenant with minimal data - User becomes admin',
+  })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'Tenant created successfully and user assigned as admin',
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'User must be authenticated',
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Invalid input data or email not verified',
+  })
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description:
+      'Tenant with this email already exists or user already has a tenant',
+  })
+  async createMinimal(
+    @Body() createTenantMinimalDto: CreateTenantMinimalDto,
+    @CurrentUser() user: CurrentUserDto,
+  ): Promise<any> {
+    const userId = user?.userId;
+
+    const result = await this.tenantsService.createMinimal(
+      createTenantMinimalDto,
+      userId,
+    );
+
+    return {
+      tenant: TenantResponseDto.fromEntity(result.tenant),
+      user: result.user
+        ? {
+            id: result.user.id,
+            email: result.user.email,
+            firstName: result.user.firstName,
+            lastName: result.user.lastName,
+            role: result.user.role,
+            tenantId: result.user.tenantId,
+            emailVerified: result.user.emailVerified,
+          }
+        : undefined,
+    };
   }
 
   @Get()

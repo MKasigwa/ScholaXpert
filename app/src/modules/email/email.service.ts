@@ -219,6 +219,44 @@ export class EmailService {
   }
 
   /**
+   * Send 6-digit verification code
+   */
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async sendVerificationCode(
+    email: string,
+    code: string,
+    firstName: string,
+  ): Promise<void> {
+    this.logger.log(`Sending verification code to ${email}`);
+    this.logger.log(`Verification code for ${email}: ${code}`);
+
+    // TODO: Integrate with actual email service
+    // For development, log the code
+    this.logger.log(`
+      ====================================
+      EMAIL VERIFICATION CODE
+      ====================================
+      To: ${email}
+      Name: ${firstName}
+      Code: ${code}
+      Valid for: 10 minutes
+      ====================================
+    `);
+
+    // In production, send actual email:
+    // await this.emailProvider.send({
+    //   to: email,
+    //   subject: 'Your Email Verification Code - ScholaXpert',
+    //   template: 'verification-code',
+    //   data: {
+    //     firstName,
+    //     code,
+    //     expiresIn: '10 minutes'
+    //   }
+    // });
+  }
+
+  /**
    * Core email sending method (mock for now, replace with real email service)
    */
   // eslint-disable-next-line @typescript-eslint/require-await
@@ -237,5 +275,43 @@ export class EmailService {
     // await this.sendgridService.send(options);
 
     this.logger.log(`Email sent to ${options.to}: ${options.subject}`);
+  }
+
+  /**
+   * Send 6-digit password reset code
+   */
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async sendPasswordResetCode(
+    email: string,
+    code: string,
+    firstName: string,
+  ): Promise<void> {
+    this.logger.log(`Sending password reset code to ${email}`);
+    this.logger.log(`Password reset code for ${email}: ${code}`);
+
+    // TODO: Integrate with actual email service
+    // For development, log the code
+    this.logger.log(`
+      ====================================
+      PASSWORD RESET CODE
+      ====================================
+      To: ${email}
+      Name: ${firstName}
+      Code: ${code}
+      Valid for: 10 minutes
+      ====================================
+    `);
+
+    // In production, send actual email:
+    // await this.emailProvider.send({
+    //   to: email,
+    //   subject: 'Your Password Reset Code - ScholaXpert',
+    //   template: 'password-reset-code',
+    //   data: {
+    //     firstName,
+    //     code,
+    //     expiresIn: '10 minutes'
+    //   }
+    // });
   }
 }

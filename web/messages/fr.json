@@ -78,5 +78,110 @@
       "terms": "Conditions",
       "contact": "Contact"
     }
+  },
+  "SignUp": {
+    "appName": "ScholaXpert",
+    "tagline": "Créez votre compte",
+    "title": "Inscription",
+    "description": "Entrez vos informations pour créer un nouveau compte",
+    "form": {
+      "firstName": {
+        "label": "Prénom",
+        "placeholder": "Jean",
+        "required": "Le prénom est requis"
+      },
+      "lastName": {
+        "label": "Nom",
+        "placeholder": "Dupont",
+        "required": "Le nom est requis"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "vous@exemple.com",
+        "required": "L'email est requis",
+        "invalid": "Format d'email invalide",
+        "exists": "Cet email est déjà enregistré"
+      },
+      "phoneNumber": {
+        "label": "Numéro de téléphone (optionnel)",
+        "placeholder": "+33612345678"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "••••••••",
+        "required": "Le mot de passe est requis",
+        "minLength": "Le mot de passe doit contenir au moins 8 caractères",
+        "requirements": "Le mot de passe doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial",
+        "strength": {
+          "weak": "Faible",
+          "fair": "Passable",
+          "good": "Bon",
+          "strong": "Fort",
+          "veryStrong": "Très Fort"
+        }
+      },
+      "confirmPassword": {
+        "label": "Confirmer le mot de passe",
+        "placeholder": "••••••••",
+        "mismatch": "Les mots de passe ne correspondent pas"
+      }
+    },
+    "passwordRequirements": "Le mot de passe doit contenir au moins 8 caractères et inclure une majuscule, une minuscule, un chiffre et un caractère spécial.",
+    "submitButton": {
+      "creating": "Création du compte...",
+      "create": "Créer un compte"
+    },
+    "footer": {
+      "hasAccount": "Vous avez déjà un compte ?",
+      "signIn": "Se connecter"
+    },
+    "terms": "En créant un compte, vous acceptez nos Conditions d'utilisation et notre Politique de confidentialité",
+    "toast": {
+      "success": "Compte créé avec succès !",
+      "error": "Échec de l'inscription. Veuillez réessayer."
+    }
+  },
+  "Login": {
+    "appName": "ScholaXpert",
+    "tagline": "Bon retour ! Veuillez vous connecter pour continuer",
+    "title": "Connexion",
+    "description": "Entrez vos identifiants pour accéder à votre compte",
+    "form": {
+      "email": {
+        "label": "Email",
+        "placeholder": "vous@exemple.com",
+        "required": "L'email est requis",
+        "invalid": "Format d'email invalide"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "••••••••",
+        "required": "Le mot de passe est requis",
+        "forgotPassword": "Mot de passe oublié ?"
+      },
+      "rememberMe": "Se souvenir de moi"
+    },
+    "submitButton": {
+      "signingIn": "Connexion en cours...",
+      "signIn": "Se connecter"
+    },
+    "footer": {
+      "noAccount": "Vous n'avez pas de compte ?",
+      "signUp": "S'inscrire"
+    },
+    "demoNote": "Identifiants de démonstration : Utilisez n'importe quel email et mot de passe répondant aux exigences pour tester le système",
+    "copyright": "© 2025 ScholaXpert. Tous droits réservés.",
+    "toast": {
+      "success": "Connexion réussie !",
+      "error": "Échec de la connexion. Veuillez réessayer.",
+      "invalidCredentials": "Email ou mot de passe invalide",
+      "accountLocked": "Votre compte a été verrouillé",
+      "accountSuspended": "Votre compte a été suspendu"
+    },
+    "errors": {
+      "invalidCredentials": "Email ou mot de passe invalide",
+      "accountLocked": "Compte verrouillé",
+      "accountSuspended": "Compte suspendu"
+    }
   }
 }
