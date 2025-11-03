@@ -15,6 +15,8 @@ export class UserResponseDto {
   department?: string;
   designation?: string;
   emailVerified: boolean;
+  hasPendingRequest: boolean;
+  pendingRequestId: string | null;
   lastLoginAt?: Date;
   createdAt: Date;
 

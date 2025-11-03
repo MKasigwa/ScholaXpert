@@ -14,6 +14,21 @@ import { LoginDto } from './dto/login.dto';
 import { AuthResponseDto, UserResponseDto } from './dto/auth-response.dto';
 import { EmailService } from '../email/email.service';
 import * as crypto from 'crypto';
+import {
+  ResendCodeResponseDto,
+  ResendVerificationCodeDto,
+  VerifyEmailDto,
+  VerifyEmailResponseDto,
+} from './dto/verify-email.dto';
+import {
+  ForgotPasswordDto,
+  ForgotPasswordResponseDto,
+  ResetPasswordDto,
+  ResetPasswordResponseDto,
+  VerifyResetCodeDto,
+  VerifyResetCodeResponseDto,
+} from './dto/forgot-password.dto';
+import { TenantAccessService } from '../tenant-access/tenant-access.service';
 
 @Injectable()
 export class AuthService {
@@ -25,6 +40,7 @@ export class AuthService {
     private readonly userRepository: Repository<User>,
     private readonly jwtService: JwtService,
     private readonly emailService: EmailService,
+    private readonly tenantAccessRequestService: TenantAccessService,
   ) {}
 
   /**
@@ -41,7 +57,12 @@ export class AuthService {
     }
 
     // Generate email verification token
-    const emailVerificationToken = crypto.randomBytes(32).toString('hex');
+    //const emailVerificationToken = crypto.randomBytes(32).toString('hex');
+
+    // Generate 6-digit verification code
+    const verificationCode = Math.floor(
+      100000 + Math.random() * 900000,
+    ).toString();
 
     // Create new user
     const user = this.userRepository.create({
@@ -49,25 +70,42 @@ export class AuthService {
       email: registerDto.email.toLowerCase(),
       status: UserStatus.PENDING,
       emailVerified: false,
-      emailVerificationToken,
+      emailVerificationToken: verificationCode,
+      //   emailVerificationToken,
       isFirstLogin: true,
     });
 
     const savedUser = await this.userRepository.save(user);
 
     // Send verification email
-    await this.emailService.sendVerificationEmail(
+    // await this.emailService.sendVerificationEmail(
+    //   savedUser.email,
+    //   emailVerificationToken,
+    //   savedUser.firstName,
+    // );
+    // Send verification code email
+    await this.emailService.sendVerificationCode(
       savedUser.email,
-      emailVerificationToken,
+      verificationCode,
       savedUser.firstName,
     );
 
     // Generate tokens
     const tokens = await this.generateTokens(savedUser);
 
+    // Check for pending access requests
+    const pendingRequestInfo =
+      await this.tenantAccessRequestService.checkPendingAccessRequest(
+        savedUser.id,
+      );
+
     return {
       ...tokens,
-      user: UserResponseDto.fromEntity(savedUser),
+      user: {
+        ...UserResponseDto.fromEntity(savedUser),
+        hasPendingRequest: pendingRequestInfo.hasPendingRequest,
+        pendingRequestId: pendingRequestInfo.pendingRequestId || null,
+      },
     };
   }
 
@@ -122,12 +160,36 @@ export class AuthService {
     // Reset login attempts on successful login
     await this.handleSuccessfulLogin(user, ipAddress);
 
+    // If email is not verified, generate and send a new verification code
+    if (!user.emailVerified) {
+      const verificationCode = Math.floor(
+        100000 + Math.random() * 900000,
+      ).toString();
+      user.emailVerificationToken = verificationCode;
+      await this.userRepository.save(user);
+
+      // Send verification code email
+      await this.emailService.sendVerificationCode(
+        user.email,
+        verificationCode,
+        user.firstName,
+      );
+    }
+
     // Generate tokens
     const tokens = await this.generateTokens(user);
 
+    // Check for pending access requests
+    const pendingRequestInfo =
+      await this.tenantAccessRequestService.checkPendingAccessRequest(user.id);
+
     return {
       ...tokens,
-      user: UserResponseDto.fromEntity(user),
+      user: {
+        ...UserResponseDto.fromEntity(user),
+        hasPendingRequest: pendingRequestInfo.hasPendingRequest,
+        pendingRequestId: pendingRequestInfo.pendingRequestId || null,
+      },
     };
   }
 
@@ -297,5 +359,215 @@ export class AuthService {
     );
 
     return { message: 'Verification email sent' };
+  }
+
+  /**
+   * Verify email with 6-digit code
+   */
+  async verifyEmailWithCode(
+    verifyEmailDto: VerifyEmailDto,
+  ): Promise<VerifyEmailResponseDto> {
+    const user = await this.userRepository.findOne({
+      where: { email: verifyEmailDto.email.toLowerCase() },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    if (user.emailVerified) {
+      return {
+        success: true,
+        message: 'Email already verified',
+        user: {
+          id: user.id,
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          emailVerified: true,
+          emailVerifiedAt: user.emailVerifiedAt,
+        },
+      };
+    }
+
+    // Verify the code matches
+    if (user.emailVerificationToken !== verifyEmailDto.code) {
+      throw new BadRequestException('Invalid verification code');
+    }
+
+    // Update user
+    user.emailVerified = true;
+    user.emailVerifiedAt = new Date();
+    user.emailVerificationToken = undefined;
+    user.status = UserStatus.ACTIVE;
+
+    const updated = await this.userRepository.save(user);
+
+    return {
+      success: true,
+      message: 'Email verified successfully',
+      user: {
+        id: updated.id,
+        email: updated.email,
+        firstName: updated.firstName,
+        lastName: updated.lastName,
+        emailVerified: true,
+        emailVerifiedAt: updated.emailVerifiedAt,
+      },
+    };
+  }
+
+  /**
+   * Send 6-digit verification code
+   */
+  async sendVerificationCode(email: string): Promise<ResendCodeResponseDto> {
+    const user = await this.userRepository.findOne({
+      where: { email: email.toLowerCase() },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    if (user.emailVerified) {
+      throw new BadRequestException('Email already verified');
+    }
+
+    // Generate 6-digit code
+    const verificationCode = Math.floor(
+      100000 + Math.random() * 900000,
+    ).toString();
+
+    // Store code in emailVerificationToken field
+    user.emailVerificationToken = verificationCode;
+    await this.userRepository.save(user);
+
+    // Send verification email with code
+    await this.emailService.sendVerificationCode(
+      user.email,
+      verificationCode,
+      user.firstName,
+    );
+
+    return {
+      success: true,
+      message: 'Verification code sent successfully',
+      expiresIn: 600, // 10 minutes
+    };
+  }
+
+  /**
+   * Resend 6-digit verification code
+   */
+  async resendVerificationCode(
+    resendDto: ResendVerificationCodeDto,
+  ): Promise<ResendCodeResponseDto> {
+    return this.sendVerificationCode(resendDto.email);
+  }
+
+  /**
+   * Forgot password
+   */
+  async forgotPassword(
+    forgotPasswordDto: ForgotPasswordDto,
+  ): Promise<ForgotPasswordResponseDto> {
+    const user = await this.userRepository.findOne({
+      where: { email: forgotPasswordDto.email.toLowerCase() },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    // Generate 6-digit reset code
+    const resetCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Store code in passwordResetToken field
+    user.passwordResetToken = resetCode;
+    user.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+    await this.userRepository.save(user);
+
+    // Send reset email with code
+    await this.emailService.sendPasswordResetCode(
+      user.email,
+      resetCode,
+      user.firstName,
+    );
+
+    return {
+      success: true,
+      message: 'Password reset code sent successfully',
+      expiresIn: 600, // 10 minutes
+    };
+  }
+
+  /**
+   * Verify reset code
+   */
+  async verifyResetCode(
+    verifyResetCodeDto: VerifyResetCodeDto,
+  ): Promise<VerifyResetCodeResponseDto> {
+    const user = await this.userRepository.findOne({
+      where: { email: verifyResetCodeDto.email.toLowerCase() },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    // Verify the code matches and is still valid
+    if (
+      user.passwordResetToken !== verifyResetCodeDto.code ||
+      (user.passwordResetExpires && user.passwordResetExpires < new Date())
+    ) {
+      throw new BadRequestException('Invalid or expired reset code');
+    }
+
+    return {
+      success: true,
+      message: 'Reset code verified successfully',
+    };
+  }
+
+  /**
+   * Reset password
+   */
+  async resetPassword(
+    resetPasswordDto: ResetPasswordDto,
+  ): Promise<ResetPasswordResponseDto> {
+    const user = await this.userRepository.findOne({
+      where: { email: resetPasswordDto.email.toLowerCase() },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    // Verify the code matches and is still valid
+    if (
+      user.passwordResetToken !== resetPasswordDto.code ||
+      (user.passwordResetExpires && user.passwordResetExpires < new Date())
+    ) {
+      throw new BadRequestException('Invalid or expired reset code');
+    }
+
+    // Update user password
+    user.password = resetPasswordDto.newPassword;
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+
+    const updated = await this.userRepository.save(user);
+    // await this.userRepository.save(user);
+
+    return {
+      success: true,
+      message: 'Password reset successfully',
+      user: {
+        id: updated.id,
+        email: updated.email,
+        firstName: updated.firstName,
+        lastName: updated.lastName,
+      },
+    };
   }
 }
