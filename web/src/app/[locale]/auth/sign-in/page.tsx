@@ -1,6 +1,5 @@
-import React from "react";
-import { LoginPageWithBackend } from "./sign-in";
+import { SignInPage } from "@/components/auth/SignInPage";
 
-export default function page() {
-  return <LoginPageWithBackend />;
+export default function SignIn() {
+  return <SignInPage />;
 }

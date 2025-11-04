@@ -1,10 +1,20 @@
 import { AxiosResponse } from "axios";
 import api from "../api";
 import {
-  RegisterDto,
   LoginDto,
-  AuthResponseDto,
+  RegisterDto,
   UserResponseDto,
+  AuthResponseDto,
+  VerifyEmailDto,
+  ResendVerificationCodeDto,
+  VerifyEmailResponseDto,
+  ResendCodeResponseDto,
+  ForgotPasswordDto,
+  ForgotPasswordResponseDto,
+  VerifyResetCodeDto,
+  VerifyResetCodeResponseDto,
+  ResetPasswordDto,
+  ResetPasswordResponseDto,
 } from "../types/auth-types";
 
 export class AuthApi {
@@ -14,28 +24,40 @@ export class AuthApi {
    * Token storage helper methods
    */
   private static setTokens(accessToken: string, refreshToken?: string): void {
-    localStorage.setItem("accessToken", accessToken);
-    if (refreshToken) {
-      localStorage.setItem("refreshToken", refreshToken);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("accessToken", accessToken);
+      if (refreshToken) {
+        localStorage.setItem("refreshToken", refreshToken);
+      }
     }
   }
 
   private static setUserData(user: UserResponseDto): void {
-    localStorage.setItem("user", JSON.stringify(user));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("user", JSON.stringify(user));
+    }
   }
 
   private static clearTokens(): void {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("user");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("user");
+    }
   }
 
   private static getAccessToken(): string | null {
-    return localStorage.getItem("accessToken");
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("accessToken");
+    }
+    return null;
   }
 
   private static getRefreshToken(): string | null {
-    return localStorage.getItem("refreshToken");
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("refreshToken");
+    }
+    return null;
   }
 
   /**
@@ -48,9 +70,12 @@ export class AuthApi {
     );
 
     // Store token and user data
-    if (response.data.accessToken) {
-      this.setTokens(response.data.accessToken, response.data.refreshToken);
-      this.setUserData(response.data.user);
+    if (response.data.data.accessToken) {
+      this.setTokens(
+        response.data.data.accessToken,
+        response.data.data.refreshToken
+      );
+      this.setUserData(response.data.data.user);
     }
 
     return response.data;
@@ -66,9 +91,12 @@ export class AuthApi {
     );
 
     // Store token and user data
-    if (response.data.accessToken) {
-      this.setTokens(response.data.accessToken, response.data.refreshToken);
-      this.setUserData(response.data.user);
+    if (response.data.data.accessToken) {
+      this.setTokens(
+        response.data.data.accessToken,
+        response.data.data.refreshToken
+      );
+      this.setUserData(response.data.data.user);
     }
 
     return response.data;
@@ -124,6 +152,8 @@ export class AuthApi {
    * Get stored user data
    */
   static getStoredUser(): UserResponseDto | null {
+    if (typeof window === "undefined") return null;
+
     const userStr = localStorage.getItem("user");
     if (!userStr) return null;
 
@@ -140,28 +170,77 @@ export class AuthApi {
   static clearAuthData(): void {
     this.clearTokens();
   }
+
+  /**
+   * Verify email with 6-digit code
+   */
+  static async verifyEmailWithCode(
+    data: VerifyEmailDto
+  ): Promise<VerifyEmailResponseDto> {
+    const response: AxiosResponse<VerifyEmailResponseDto> = await api.post(
+      `${this.baseUrl}/verify-email-code`,
+      data
+    );
+
+    // Update stored user data if verification successful
+    if (response.data.success && response.data.user) {
+      this.setUserData(response.data.user as UserResponseDto);
+    }
+
+    return response.data;
+  }
+
+  /**
+   * Resend verification code
+   */
+  static async resendVerificationCode(
+    data: ResendVerificationCodeDto
+  ): Promise<ResendCodeResponseDto> {
+    const response: AxiosResponse<ResendCodeResponseDto> = await api.post(
+      `${this.baseUrl}/resend-verification-code`,
+      data
+    );
+    return response.data;
+  }
+
+  /**
+   * Forgot password
+   */
+  static async forgotPassword(
+    data: ForgotPasswordDto
+  ): Promise<ForgotPasswordResponseDto> {
+    const response: AxiosResponse<ForgotPasswordResponseDto> = await api.post(
+      `${this.baseUrl}/forgot-password`,
+      data
+    );
+    return response.data;
+  }
+
+  /**
+   * Verify reset code
+   */
+  static async verifyResetCode(
+    data: VerifyResetCodeDto
+  ): Promise<VerifyResetCodeResponseDto> {
+    const response: AxiosResponse<VerifyResetCodeResponseDto> = await api.post(
+      `${this.baseUrl}/verify-reset-code`,
+      data
+    );
+    return response.data;
+  }
+
+  /**
+   * Reset password
+   */
+  static async resetPassword(
+    data: ResetPasswordDto
+  ): Promise<ResetPasswordResponseDto> {
+    const response: AxiosResponse<ResetPasswordResponseDto> = await api.post(
+      `${this.baseUrl}/reset-password`,
+      data
+    );
+    return response.data;
+  }
 }
 
 export default AuthApi;
-
-// Legacy function exports for backward compatibility
-/** @deprecated Use AuthApi.register instead */
-export const register = AuthApi.register.bind(AuthApi);
-
-/** @deprecated Use AuthApi.login instead */
-export const login = AuthApi.login.bind(AuthApi);
-
-/** @deprecated Use AuthApi.getCurrentUser instead */
-export const getCurrentUser = AuthApi.getCurrentUser.bind(AuthApi);
-
-/** @deprecated Use AuthApi.refreshToken instead */
-export const refreshToken = AuthApi.refreshToken.bind(AuthApi);
-
-/** @deprecated Use AuthApi.logout instead */
-export const logout = AuthApi.logout.bind(AuthApi);
-
-/** @deprecated Use AuthApi.isAuthenticated instead */
-export const isAuthenticated = AuthApi.isAuthenticated.bind(AuthApi);
-
-/** @deprecated Use AuthApi.getStoredUser instead */
-export const getStoredUser = AuthApi.getStoredUser.bind(AuthApi);

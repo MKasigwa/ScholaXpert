@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import { useTranslations } from "next-intl";
-// import { Link, useNavigate } from "react-router-dom";
-import { redirect } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useTranslations, useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 import {
   Card,
   CardContent,
@@ -15,30 +15,32 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+} from "../ui/card";
+// import { Alert, AlertDescription } from "../ui/alert";
+import { LanguageSwitcher } from "../LanguageSwitcher";
+import { ThemeSwitcher } from "../ThemeSwitcher";
 import {
   GraduationCap,
   Mail,
   Lock,
   User,
   Phone,
-  AlertCircle,
-  CheckCircle2,
   Eye,
   EyeOff,
   Loader2,
 } from "lucide-react";
 import { toast } from "sonner";
-import { useAuth } from "@/contexts/auth-context";
-import { LanguageSwitcher } from "@/components/ui/common/language-switcher";
+import { useRegister } from "@/hooks/useAuth";
+import { RegisterDto } from "@/lib/types/auth-types";
 import { Link } from "@/i18n/navigation";
 
-export function SignupPage() {
+export function SignUpPage() {
   const t = useTranslations("SignUp");
-  //   const { locale } = useLocale();
-  //   const navigate = useNavigate();
-  const { register, isLoading } = useAuth();
+  const locale = useLocale();
+  const router = useRouter();
+
+  // Use the register hook
+  const { registerAsync, isLoading } = useRegister();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -101,22 +103,54 @@ export function SignupPage() {
     }
 
     try {
-      await register({
+      // Prepare registration data
+      const registerData: RegisterDto = {
         email: formData.email,
         password: formData.password,
         firstName: formData.firstName,
         lastName: formData.lastName,
         phoneNumber: formData.phoneNumber || undefined,
-      });
+      };
+
+      // Call the registration API using the hook
+      const response = await registerAsync(registerData);
 
       toast.success(t("toast.success"));
-      redirect("/dashboard");
+
+      // Automatically sign in after successful registration
+      const signInResult = await signIn("credentials", {
+        email: formData.email,
+        password: formData.password,
+        redirect: false,
+      });
+
+      if (signInResult?.ok) {
+        // Check if user needs email verification
+        if (response.data.user && !response.data.user.emailVerified) {
+          router.push(`/${locale}/auth/verify-email`);
+        } else {
+          router.push(`/${locale}/dashboard`);
+        }
+        router.refresh();
+      } else {
+        // If auto sign-in fails, redirect to sign-in page
+        router.push(`/${locale}/auth/sign-in`);
+      }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      const message = error?.response?.data?.message || t("toast.error");
-      toast.error(message);
+      console.error("Registration error:", error);
 
-      if (error?.response?.status === 409) {
+      // Handle different types of errors
+      const errorMessage =
+        error?.response?.data?.message || error?.message || t("toast.error");
+      toast.error(errorMessage);
+
+      // Check for specific error types
+      if (
+        errorMessage.toLowerCase().includes("already exists") ||
+        errorMessage.toLowerCase().includes("duplicate") ||
+        errorMessage.toLowerCase().includes("email")
+      ) {
         setErrors({ email: t("form.email.exists") });
       }
     }
@@ -140,7 +174,7 @@ export function SignupPage() {
     if (/[a-z]/.test(password)) strength++;
     if (/[A-Z]/.test(password)) strength++;
     if (/\d/.test(password)) strength++;
-    if (/@$!%*?&]/.test(password)) strength++;
+    if (/[@$!%*?&]/.test(password)) strength++;
 
     const labels = [
       "",
@@ -166,9 +200,10 @@ export function SignupPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4">
-      {/* Language Switcher - Top Right */}
-      <div className="fixed top-4 right-4 z-50">
+      {/* Language & Theme Switchers - Top Corners */}
+      <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
         <LanguageSwitcher />
+        <ThemeSwitcher />
       </div>
 
       <motion.div
@@ -213,6 +248,7 @@ export function SignupPage() {
                       onChange={handleChange("firstName")}
                       className="pl-10"
                       disabled={isLoading}
+                      autoComplete="given-name"
                     />
                   </div>
                   {errors.firstName && (
@@ -233,6 +269,7 @@ export function SignupPage() {
                       onChange={handleChange("lastName")}
                       className="pl-10"
                       disabled={isLoading}
+                      autoComplete="family-name"
                     />
                   </div>
                   {errors.lastName && (
@@ -256,6 +293,7 @@ export function SignupPage() {
                     onChange={handleChange("email")}
                     className="pl-10"
                     disabled={isLoading}
+                    autoComplete="email"
                   />
                 </div>
                 {errors.email && (
@@ -278,6 +316,7 @@ export function SignupPage() {
                     onChange={handleChange("phoneNumber")}
                     className="pl-10"
                     disabled={isLoading}
+                    autoComplete="tel"
                   />
                 </div>
               </div>
@@ -295,11 +334,13 @@ export function SignupPage() {
                     onChange={handleChange("password")}
                     className="pl-10 pr-10"
                     disabled={isLoading}
+                    autoComplete="new-password"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    tabIndex={-1}
                   >
                     {showPassword ? (
                       <EyeOff className="h-4 w-4" />
@@ -308,16 +349,20 @@ export function SignupPage() {
                     )}
                   </button>
                 </div>
+                {errors.password && (
+                  <p className="text-sm text-destructive">{errors.password}</p>
+                )}
+                {/* Password Strength Indicator */}
                 {formData.password && (
                   <div className="space-y-1">
-                    <div className="flex gap-1">
-                      {[1, 2, 3, 4, 5].map((i) => (
+                    <div className="flex gap-1 h-1">
+                      {[1, 2, 3, 4, 5].map((level) => (
                         <div
-                          key={i}
-                          className={`h-1 flex-1 rounded-full ${
-                            i <= strength.strength
+                          key={level}
+                          className={`flex-1 rounded-full transition-colors ${
+                            level <= strength.strength
                               ? strength.color
-                              : "bg-gray-200"
+                              : "bg-gray-200 dark:bg-gray-700"
                           }`}
                         />
                       ))}
@@ -328,9 +373,6 @@ export function SignupPage() {
                       </p>
                     )}
                   </div>
-                )}
-                {errors.password && (
-                  <p className="text-sm text-destructive">{errors.password}</p>
                 )}
               </div>
 
@@ -349,11 +391,13 @@ export function SignupPage() {
                     onChange={handleChange("confirmPassword")}
                     className="pl-10 pr-10"
                     disabled={isLoading}
+                    autoComplete="new-password"
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    tabIndex={-1}
                   >
                     {showConfirmPassword ? (
                       <EyeOff className="h-4 w-4" />
@@ -369,14 +413,6 @@ export function SignupPage() {
                 )}
               </div>
 
-              {/* Password Requirements */}
-              <Alert>
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription className="text-xs">
-                  {t("passwordRequirements")}
-                </AlertDescription>
-              </Alert>
-
               {/* Submit Button */}
               <Button
                 type="submit"
@@ -390,10 +426,7 @@ export function SignupPage() {
                     {t("submitButton.creating")}
                   </>
                 ) : (
-                  <>
-                    <CheckCircle2 className="mr-2 h-4 w-4" />
-                    {t("submitButton.create")}
-                  </>
+                  t("submitButton.create")
                 )}
               </Button>
             </form>
@@ -410,11 +443,6 @@ export function SignupPage() {
             </div>
           </CardFooter>
         </Card>
-
-        {/* Footer */}
-        <p className="text-center text-xs text-muted-foreground mt-8">
-          {t("terms")}
-        </p>
       </motion.div>
     </div>
   );

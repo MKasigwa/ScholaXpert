@@ -4,7 +4,11 @@ import "./globals.css";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { Providers } from "./providers";
+import { getMessages } from "next-intl/server";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { SessionProvider } from "@/components/providers/SessionProvider";
+import { QueryProvider } from "@/components/providers/QueryProvider";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,14 +39,23 @@ export default async function RootLayout({ children, params, session }: Props) {
     notFound();
   }
 
+  const messages = await getMessages();
+
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextIntlClientProvider>
-          <Providers session={session}>{children}</Providers>
-        </NextIntlClientProvider>
+        <ThemeProvider defaultTheme="system" storageKey="scholaxpert-theme">
+          <SessionProvider>
+            <QueryProvider>
+              <NextIntlClientProvider messages={messages}>
+                {children}
+                <Toaster position="bottom-right" richColors />
+              </NextIntlClientProvider>
+            </QueryProvider>
+          </SessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
