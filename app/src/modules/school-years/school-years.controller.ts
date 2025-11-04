@@ -37,6 +37,8 @@ import {
 } from './dto/bulk-action.dto';
 import { PaginatedResponseDto } from '../../common/dto/paginated-response.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { CurrentUserDto } from 'src/common/dto/current-user.dto';
 // import { CurrentUser } from '../auth/decorators/current-user.decorator';
 
 @ApiTags('School Years')
@@ -67,9 +69,14 @@ export class SchoolYearsController {
   })
   async create(
     @Body() createSchoolYearDto: CreateSchoolYearDto,
+    @CurrentUser() user: CurrentUserDto,
   ): Promise<SchoolYearResponseDto> {
-    const schoolYear =
-      await this.schoolYearsService.create(createSchoolYearDto);
+    const userId = user?.userId;
+
+    const schoolYear = await this.schoolYearsService.create(
+      createSchoolYearDto,
+      userId,
+    );
     return SchoolYearResponseDto.fromEntity(schoolYear);
   }
 

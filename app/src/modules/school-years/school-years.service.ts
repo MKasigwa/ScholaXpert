@@ -35,7 +35,10 @@ export class SchoolYearsService {
   /**
    * Create a new school year
    */
-  async create(createDto: CreateSchoolYearDto): Promise<SchoolYear> {
+  async create(
+    createDto: CreateSchoolYearDto,
+    createdBy: string,
+  ): Promise<SchoolYear> {
     // Validate dates
     this.validateDates(createDto.startDate, createDto.endDate);
 
@@ -76,7 +79,7 @@ export class SchoolYearsService {
         graduationDate: createDto.graduationDate
           ? new Date(createDto.graduationDate)
           : undefined,
-        updatedBy: createDto.createdBy, // Initially same as createdBy
+        updatedBy: createdBy, // Initially same as createdBy
       });
 
       const saved = await queryRunner.manager.save(SchoolYear, schoolYear);
