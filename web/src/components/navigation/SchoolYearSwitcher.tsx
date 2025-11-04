@@ -27,14 +27,21 @@ import {
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
-// import { useAppStore, SchoolYear } from "@/store/useAppStore";
+// import {
+//   useAppStore,
+//   SchoolYear as StoreSchoolYear,
+// } from "@/store/useAppStore";
 import {
   useSchoolYearsByTenant,
   useCreateSchoolYear,
 } from "@/hooks/useSchoolYears";
+import type { SchoolYearWithStats } from "@/lib/types/school-year-types";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { SchoolYear, useAppStore } from "../../../store/useAppStore";
+import {
+  useAppStore,
+  SchoolYear as StoreSchoolYear,
+} from "../../../store/useAppStore";
 
 interface SchoolYearSwitcherProps {
   compact?: boolean;
@@ -75,16 +82,18 @@ export function SchoolYearSwitcher({
   const { createSchoolYearAsync, isLoading: isCreating } =
     useCreateSchoolYear();
 
-  // Convert to SchoolYear[] format for the store
-  const schoolYears: SchoolYear[] = schoolYearsList.map((sy) => ({
-    id: sy.id,
-    name: sy.name,
-    startDate: sy.startDate,
-    endDate: sy.endDate,
-    isDefault: sy.isDefault,
-    isCurrent: sy.isCurrent,
-    status: sy.status,
-  }));
+  // Convert to StoreSchoolYear[] format for the store
+  const schoolYears: StoreSchoolYear[] = schoolYearsList.map(
+    (sy: SchoolYearWithStats) => ({
+      id: sy.id,
+      name: sy.name,
+      startDate: sy.startDate,
+      endDate: sy.endDate,
+      isDefault: sy.isDefault,
+      isCurrent: sy.isCurrent || sy.isActive, // Fallback to isActive
+      status: sy.status,
+    })
+  );
 
   // Find current/default school year
   const currentSchoolYear = useMemo(() => {
@@ -125,7 +134,7 @@ export function SchoolYearSwitcher({
     isLoadingSchoolYears,
   ]);
 
-  const handleSelectYear = (year: SchoolYear) => {
+  const handleSelectYear = (year: StoreSchoolYear) => {
     setSelectedYear(year);
     setOpen(false);
   };
@@ -152,21 +161,21 @@ export function SchoolYearSwitcher({
         code: formData.code,
         startDate: formData.startDate,
         endDate: formData.endDate,
-        description: formData.description,
+        description: formData.description || undefined,
         isDefault: schoolYears.length === 0, // Set as default if it's the first one
         status: "active",
         tenantId: selectedTenant.id,
         createdBy: session.user.id,
       });
 
-      // Convert to SchoolYear format and set as selected
-      const schoolYearForStore: SchoolYear = {
+      // Convert to StoreSchoolYear format and set as selected
+      const schoolYearForStore: StoreSchoolYear = {
         id: newSchoolYear.id,
         name: newSchoolYear.name,
         startDate: newSchoolYear.startDate,
         endDate: newSchoolYear.endDate,
         isDefault: newSchoolYear.isDefault,
-        isCurrent: newSchoolYear.isCurrent,
+        isCurrent: newSchoolYear.isCurrent || newSchoolYear.isActive,
         status: newSchoolYear.status,
       };
 
