@@ -1,7 +1,9 @@
+import { BaseEntity } from 'src/common/entities/base.entity';
 import { Entity, Column, Index } from 'typeorm';
-import { BaseEntity } from '../../../common/entities/base.entity';
 
 export type SchoolYearStatus = 'draft' | 'active' | 'archived';
+export type EnrollmentStatus = 'open' | 'closed' | 'pending';
+export type AcademicCalendarStatus = 'complete' | 'incomplete' | 'draft';
 
 @Entity('school_years')
 @Index(['tenantId', 'status'])
@@ -9,14 +11,12 @@ export type SchoolYearStatus = 'draft' | 'active' | 'archived';
 @Index(['tenantId', 'startDate', 'endDate'])
 export class SchoolYear extends BaseEntity {
   @Column({ name: 'tenant_id', type: 'uuid' })
-  @Index()
   tenantId: string;
 
   @Column({ name: 'name', length: 100 })
   name: string;
 
   @Column({ name: 'code', length: 20 })
-  @Index()
   code: string;
 
   @Column({ name: 'start_date', type: 'date' })
@@ -71,7 +71,7 @@ export class SchoolYear extends BaseEntity {
     enum: ['open', 'closed', 'pending'],
     default: 'pending',
   })
-  enrollmentStatus: 'open' | 'closed' | 'pending';
+  enrollmentStatus: EnrollmentStatus;
 
   @Column({
     name: 'academic_calendar_status',
@@ -79,7 +79,9 @@ export class SchoolYear extends BaseEntity {
     enum: ['complete', 'incomplete', 'draft'],
     default: 'draft',
   })
-  academicCalendarStatus: 'complete' | 'incomplete' | 'draft';
+  academicCalendarStatus: AcademicCalendarStatus;
+
+  // Audit fields
 
   @Column({ name: 'deleted_by', length: 100, nullable: true })
   deletedBy?: string;
