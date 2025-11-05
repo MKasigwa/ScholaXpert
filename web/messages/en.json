@@ -1,0 +1,742 @@
+{
+  "ComingSoon": {
+    "tagline": "Professional School Management",
+    "comingSoon": "Coming Soon",
+    "launchingSoon": "Launching Soon",
+    "heroTitle": "The Future of School Management",
+    "heroDescription": "A comprehensive, enterprise-grade platform designed to transform educational institutions with intelligent automation, powerful analytics, and seamless multi-tenant architecture.",
+    "countdown": {
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    },
+    "email": {
+      "placeholder": "Enter your email for early access",
+      "notifyMe": "Notify Me",
+      "thankYou": "Thanks! We'll notify you when we launch.",
+      "waitlist": "Join 5,000+ educators already on the waitlist"
+    },
+    "stats": {
+      "studentsReady": "Students Ready",
+      "schoolsWaiting": "Schools Waiting",
+      "modules": "Modules",
+      "uptimeSLA": "Uptime SLA"
+    },
+    "floating": {
+      "multiTenant": "Multi-Tenant",
+      "architecture": "Architecture",
+      "gdprReady": "GDPR Ready",
+      "compliant": "Compliant"
+    },
+    "features": {
+      "sectionBadge": "Features",
+      "sectionTitle": "Everything You Need to Manage Your Institution",
+      "sectionDescription": "A complete suite of integrated modules designed for modern educational institutions",
+      "studentManagement": {
+        "title": "Student Management",
+        "description": "Comprehensive student profiles, admission workflows, and academic tracking"
+      },
+      "smartScheduling": {
+        "title": "Smart Scheduling",
+        "description": "Automated timetables, resource booking, and event management"
+      },
+      "advancedAnalytics": {
+        "title": "Advanced Analytics",
+        "description": "Real-time insights, performance reports, and financial dashboards"
+      },
+      "academicExcellence": {
+        "title": "Academic Excellence",
+        "description": "Grade management, curriculum planning, and learning resources"
+      },
+      "securityCompliance": {
+        "title": "Security & Compliance",
+        "description": "GDPR compliance, role-based access, and comprehensive audit logs"
+      },
+      "communicationHub": {
+        "title": "Communication Hub",
+        "description": "Parent portals, notifications, and multi-channel messaging"
+      }
+    },
+    "highlights": {
+      "comprehensiveModules": {
+        "title": "Comprehensive Modules",
+        "description": "15+ integrated modules covering every aspect of school management"
+      },
+      "modernTechnology": {
+        "title": "Modern Technology",
+        "description": "Built with cutting-edge tech stack for performance and reliability"
+      },
+      "userCentricDesign": {
+        "title": "User-Centric Design",
+        "description": "Intuitive interface designed for teachers, admins, and parents"
+      }
+    },
+    "footer": {
+      "copyright": "© 2025 ScholaXpert. Building the future of education management.",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "contact": "Contact"
+    }
+  },
+   "SignUp": {
+    "appName": "ScholaXpert",
+    "tagline": "Create your account",
+    "title": "Sign Up",
+    "description": "Enter your details to create a new account",
+    "form": {
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "John",
+        "required": "First name is required"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Doe",
+        "required": "Last name is required"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "you@example.com",
+        "required": "Email is required",
+        "invalid": "Invalid email format",
+        "exists": "This email is already registered"
+      },
+      "phoneNumber": {
+        "label": "Phone Number (Optional)",
+        "placeholder": "+1234567890"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "••••••••",
+        "required": "Password is required",
+        "minLength": "Password must be at least 8 characters",
+        "requirements": "Password must contain uppercase, lowercase, number, and special character",
+        "strength": {
+          "weak": "Weak",
+          "fair": "Fair",
+          "good": "Good",
+          "strong": "Strong",
+          "veryStrong": "Very Strong"
+        }
+      },
+      "confirmPassword": {
+        "label": "Confirm Password",
+        "placeholder": "••••••••",
+        "mismatch": "Passwords do not match"
+      }
+    },
+    "passwordRequirements": "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.",
+    "submitButton": {
+      "creating": "Creating Account...",
+      "create": "Create Account"
+    },
+    "footer": {
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in"
+    },
+    "terms": "By creating an account, you agree to our Terms of Service and Privacy Policy",
+    "toast": {
+      "success": "Account created successfully!",
+      "error": "Échec de l'inscription. Veuillez réessayer."
+    }
+  },
+   "SignIn": {
+    "appName": "ScholaXpert",
+    "tagline": "Welcome back! Please sign in to continue",
+    "title": "Sign In",
+    "description": "Enter your credentials to access your account",
+    "form": {
+      "email": {
+        "label": "Email",
+        "placeholder": "you@example.com",
+        "required": "Email is required",
+        "invalid": "Invalid email format"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "••••••••",
+        "required": "Password is required",
+        "forgotPassword": "Forgot password?"
+      },
+      "rememberMe": "Remember me"
+    },
+    "submitButton": {
+      "signingIn": "Signing in...",
+      "signIn": "Sign In"
+    },
+    "footer": {
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    },
+    "demoNote": "Demo Credentials: Use any email and password that meets requirements to test the system",
+    "copyright": "© 2025 ScholaXpert. All rights reserved.",
+    "toast": {
+      "success": "Login successful!",
+      "error": "Login failed. Please try again.",
+      "invalidCredentials": "Invalid email or password",
+      "accountLocked": "Your account has been locked",
+      "accountSuspended": "Your account has been suspended"
+    },
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "accountLocked": "Account locked",
+      "accountSuspended": "Account suspended"
+    }
+  },
+ "Workspace": {
+    "appName": "ScholaXpert",
+    "tagline": "Professional School Management System",
+    "loading": "Loading workspace...",
+    "welcome": {
+      "title": "Welcome to ScholaXpert!",
+      "subtitle": "To get started, create your school or request access to an existing one."
+    },
+    "createTenant": {
+      "badge": "Recommended",
+      "title": "Create Your School",
+      "description": "Set up a new school and become the administrator",
+      "button": "Create School",
+      "features": {
+        "feature1": "Full administrative control",
+        "feature2": "Unlimited user management",
+        "feature3": "Complete module access",
+        "feature4": "Instant activation"
+      }
+    },
+    "joinTenant": {
+      "badge": "Join Existing",
+      "title": "Request School Access",
+      "description": "Join an existing school by submitting an access request",
+      "button": "Request Access",
+      "features": {
+        "feature1": "Quick approval process",
+        "feature2": "Role-based access",
+        "feature3": "Collaborative workspace",
+        "feature4": "Secure verification"
+      }
+    },
+    "info": {
+      "multiUser": {
+        "title": "Multi-User Support",
+        "description": "Collaborate with staff and administrators in real-time"
+      },
+      "secure": {
+        "title": "Secure & Compliant",
+        "description": "Enterprise-grade security with role-based access control"
+      },
+      "flexible": {
+        "title": "Flexible Roles",
+        "description": "Customizable permissions for different user types"
+      }
+    },
+    "footer": "By creating or joining a school, you agree to our Terms of Service and Privacy Policy."
+  },
+  "EmailVerification": {
+    "appName": "ScholaXpert",
+    "tagline": "Professional School Management System",
+    "title": "Verify Your Email",
+    "description": "We've sent a 6-digit verification code to",
+    "inputLabel": "Enter Verification Code",
+    "verifyButton": "Verify Email",
+    "verifying": "Verifying...",
+    "didntReceive": "Didn't receive the code?",
+    "resendCode": "Resend Code",
+    "resendIn": "Resend in {time}",
+    "sending": "Sending...",
+    "backToSignIn": "Back to Sign In",
+    "helpText": "Having trouble? Contact our support team.",
+    "attempts": {
+      "label": "Attempt {current} of {max}"
+    },
+    "errors": {
+      "noEmail": "No Email Provided",
+      "noEmailDescription": "Please sign in first to verify your email.",
+      "generic": "Verification failed. Please try again.",
+      "maxAttempts": "Maximum verification attempts reached. Please request a new code."
+    },
+    "toast": {
+      "success": "Email verified successfully!",
+      "codeSent": "Verification code sent successfully!",
+      "resendError": "Failed to resend verification code"
+    }
+  },
+  "CreateTenant": {
+    "title": "Create Your School",
+    "subtitle": "Set up your institution and start managing it today",
+    "back": "Back",
+    "basicInfo": {
+      "title": "Basic Information",
+      "description": "Enter the basic details about your school"
+    },
+    "address": {
+      "title": "Address",
+      "description": "Physical location of your school"
+    },
+    "fields": {
+      "name": {
+        "label": "School Name",
+        "placeholder": "e.g., Greenfield High School"
+      },
+      "code": {
+        "label": "School Code",
+        "placeholder": "e.g., GHS001"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "school@example.com"
+      },
+      "phone": {
+        "label": "Phone",
+        "placeholder": "+1234567890"
+      },
+      "street": {
+        "label": "Street Address",
+        "placeholder": "123 Main Street"
+      },
+      "city": {
+        "label": "City",
+        "placeholder": "City"
+      },
+      "state": {
+        "label": "State/Province",
+        "placeholder": "State"
+      },
+      "country": {
+        "label": "Country",
+        "placeholder": "Country"
+      },
+      "postalCode": {
+        "label": "Postal Code",
+        "placeholder": "12345"
+      }
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "create": "Create School",
+      "creating": "Creating School..."
+    },
+    "errors": {
+      "nameRequired": "School name is required",
+      "codeRequired": "School code is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email",
+      "phoneRequired": "Phone is required",
+      "streetRequired": "Street is required",
+      "cityRequired": "City is required",
+      "countryRequired": "Country is required",
+      "fillRequired": "Please fill in all required fields",
+      "createFailed": "Failed to create school"
+    },
+    "success": {
+      "created": "School created successfully!"
+    }
+  },
+ "RequestAccess": {
+    "appName": "ScholaXpert",
+    "tagline": "Professional School Management System",
+    "title": "Request Access to School",
+    "description": "Search for your school and request access to join their workspace",
+    "form": {
+      "tenant": {
+        "label": "Search for School",
+        "placeholder": "Enter school name or code...",
+        "noResults": "No schools found. Try a different search term.",
+        "required": "Please select a school"
+      },
+      "role": {
+        "label": "Requested Role",
+        "required": "Please select a role"
+      },
+      "message": {
+        "label": "Message to Administrator",
+        "placeholder": "Tell the administrator why you want to join this school...",
+        "optional": "Optional",
+        "help": "A brief message helps administrators process your request faster"
+      }
+    },
+    "roles": {
+      "staff": "Staff Member",
+      "staffDescription": "General staff access with basic permissions",
+      "teacher": "Teacher",
+      "teacherDescription": "Access to teaching tools, grades, and student management",
+      "accountant": "Accountant",
+      "accountantDescription": "Access to financial management and payment processing",
+      "librarian": "Librarian",
+      "librarianDescription": "Access to library management and book cataloging",
+      "parent": "Parent",
+      "parentDescription": "Access to view your child's academic progress and fees"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "submit": "Submit Request",
+      "submitting": "Submitting..."
+    },
+    "info": {
+      "title": "Important Information",
+      "point1": "Your request will be sent to the school administrator for review",
+      "point2": "You'll receive a notification once your request is approved or rejected",
+      "point3": "Make sure to select the correct role based on your position"
+    },
+    "errors": {
+      "tenantRequired": "Please select a school",
+      "roleRequired": "Please select a role",
+      "fillRequired": "Please fill in all required fields",
+      "requestFailed": "Failed to submit request. Please try again."
+    },
+    "toast": {
+      "success": "Access request submitted successfully!"
+    }
+  },
+   "AccessRequestWaiting": {
+    "appName": "ScholaXpert",
+    "tagline": "Professional School Management System",
+    "loading": {
+      "message": "Loading your request..."
+    },
+    "noPendingRequest": {
+      "title": "No Pending Request",
+      "description": "You don't have any pending access requests.",
+      "requestAccessButton": "Request Access to Institution",
+      "signOutButton": "Sign Out"
+    },
+    "header": {
+      "title": "Access Request Pending",
+      "description": "Your request is being reviewed by the institution administrators"
+    },
+    "statusAlert": {
+      "message": "You will be notified by email once your request has been reviewed. You can modify or cancel your request at any time."
+    },
+    "status": {
+      "pendingReview": "Pending Review",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "roles": {
+      "SUPER_ADMIN": "Super Admin",
+      "ADMIN": "Administrator",
+      "TEACHER": "Teacher",
+      "STUDENT": "Student",
+      "PARENT": "Parent"
+    },
+    "profileCard": {
+      "title": "Your Profile",
+      "description": "Your account information",
+      "fullName": "Full Name",
+      "email": "Email"
+    },
+    "requestDetailsCard": {
+      "title": "Request Details",
+      "description": "Your access request information",
+      "institution": "Institution",
+      "code": "Code",
+      "requestedRole": "Requested Role",
+      "yourMessage": "Your Message",
+      "requestedOn": "Requested On",
+      "lastUpdated": "Last Updated"
+    },
+    "actionsCard": {
+      "title": "Actions",
+      "description": "Manage your access request",
+      "refreshStatus": "Refresh Status",
+      "modifyRequest": "Modify Request",
+      "cancelRequest": "Cancel Request",
+      "signOut": "Sign Out"
+    },
+    "helpText": "Need help? Contact support at support@scholaxpert.com",
+    "editDialog": {
+      "title": "Modify Access Request",
+      "description": "Update your role or message for this access request",
+      "roleLabel": "Requested Role",
+      "rolePlaceholder": "Select a role",
+      "messageLabel": "Message (Optional)",
+      "messagePlaceholder": "Tell the administrators why you need access...",
+      "cancelButton": "Cancel",
+      "saveButton": "Save Changes",
+      "saving": "Saving...",
+      "roles": {
+        "admin": "Administrator",
+        "teacher": "Teacher",
+        "student": "Student",
+        "parent": "Parent"
+      }
+    },
+    "cancelDialog": {
+      "title": "Cancel Access Request",
+      "description": "Are you sure you want to cancel this access request? You can submit a new request later.",
+      "keepButton": "Keep Request",
+      "cancelButton": "Cancel Request",
+      "cancelling": "Cancelling..."
+    },
+    "toast": {
+      "approved": "Your access request has been approved!",
+      "updateSuccess": "Request updated successfully",
+      "updateError": "Failed to update request",
+      "cancelSuccess": "Request cancelled successfully",
+      "cancelError": "Failed to cancel request"
+    }
+  },
+   "ForgotPassword": {
+    "appName": "ScholaXpert",
+    "tagline": "Professional School Management System",
+    "title": "Forgot Password?",
+    "subtitle": "Enter your email and we'll send you a code to reset your password",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "your@email.com",
+    "sendCodeButton": "Send Reset Code",
+    "sendingButton": "Sending...",
+    "backToSignIn": "Back to Sign In",
+    "helpText": "Remember your password?",
+    "success": {
+      "title": "Check Your Email!",
+      "message": "We've sent a 6-digit code to your email address",
+      "nextSteps": "Check your inbox and enter the code on the next page",
+      "continueButton": "Continue to Reset Password"
+    },
+    "errors": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email address",
+      "sendFailed": "Failed to send reset code",
+      "generic": "Something went wrong"
+    },
+    "toast": {
+      "success": "Reset code sent successfully!",
+      "error": "Failed to send reset code"
+    }
+  },
+   "ResetPassword": {
+    "appName": "ScholaXpert",
+    "tagline": "Professional School Management System",
+    "step1": {
+      "title": "Verify Reset Code",
+      "subtitle": "Enter the 6-digit code we sent to",
+      "inputLabel": "Verification Code",
+      "verifyButton": "Verify Code",
+      "verifying": "Verifying...",
+      "resendLabel": "Didn't receive the code?",
+      "resendButton": "Resend Code",
+      "resendIn": "Resend in {time}",
+      "sending": "Sending...",
+      "attempts": "Attempt {current} of {max}",
+      "attemptsError": "Maximum attempts reached. Please request a new code."
+    },
+    "step2": {
+      "title": "Create New Password",
+      "subtitle": "Your password must be at least 8 characters long",
+      "newPasswordLabel": "New Password",
+      "newPasswordPlaceholder": "Enter new password",
+      "confirmPasswordLabel": "Confirm Password",
+      "confirmPasswordPlaceholder": "Confirm new password",
+      "resetButton": "Reset Password",
+      "resetting": "Resetting...",
+      "requirements": {
+        "title": "Password must contain:",
+        "minLength": "At least 8 characters",
+        "uppercase": "One uppercase letter",
+        "lowercase": "One lowercase letter",
+        "number": "One number",
+        "special": "One special character (@$!%*?&)"
+      }
+    },
+    "backToSignIn": "Back to Sign In",
+    "errors": {
+      "codeInvalid": "Invalid verification code",
+      "codeExpired": "Code has expired",
+      "passwordRequired": "Password is required",
+      "passwordTooShort": "Password must be at least 8 characters",
+      "passwordWeak": "Password must contain uppercase, lowercase, number, and special character",
+      "passwordMismatch": "Passwords do not match",
+      "confirmRequired": "Please confirm your password",
+      "maxAttempts": "Maximum verification attempts reached",
+      "resetFailed": "Failed to reset password",
+      "generic": "Something went wrong"
+    },
+    "toast": {
+      "codeVerified": "Code verified successfully!",
+      "codeSent": "New code sent successfully!",
+      "passwordReset": "Password reset successfully!",
+      "error": "An error occurred"
+    }
+  },
+ "Dashboard": {
+    "welcome": "Welcome back",
+    "welcomeDesc": "Here's what's happening with your school today.",
+    "tenantName": "My School",
+    "subtitle":"School Management",
+    "stats": {
+      "totalStudents": "Total Students",
+      "studentsDesc": "+12% from last month",
+      "activeClasses": "Active Classes",
+      "classesDesc": "Across all levels",
+      "totalTeachers": "Teaching Staff",
+      "teachersDesc": "Active teachers",
+      "revenue": "Monthly Revenue",
+      "revenueDesc": "Current month",
+      "attendance": "Attendance Rate",
+      "attendanceDesc": "This week",
+      "pendingAdmissions": "Pending Admissions",
+      "admissionsDesc": "Awaiting review",
+      "outstandingFees": "Outstanding Fees",
+      "feesDesc": "Pending collection",
+      "libraryBooks": "Library Books",
+      "booksDesc": "Total collection"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "newStudent": "Add New Student",
+      "newStudentDesc": "Register a new student",
+      "newClass": "Create Class",
+      "newClassDesc": "Set up a new class",
+      "schedule": "Manage Schedule",
+      "scheduleDesc": "View and edit timetable",
+      "reports": "View Reports",
+      "reportsDesc": "Analytics and insights",
+      "processPayment": "Process Payment",
+      "processPaymentDesc": "Record fee payment",
+      "manageAdmissions": "Review Admissions",
+      "manageAdmissionsDesc": "Process applications",
+      "sendAnnouncement": "Send Announcement",
+      "sendAnnouncementDesc": "Notify parents/students",
+      "manageLibrary": "Library Management",
+      "manageLibraryDesc": "Books and resources"
+    },
+    "modules": {
+      "title": "System Modules",
+      "admission": "Admission",
+      "admissionDesc": "Student enrollment and applications",
+      "students": "Students",
+      "studentsDesc": "Student profiles and records",
+      "classes": "Classes",
+      "classesDesc": "Class management and configuration",
+      "academic": "Academic",
+      "academicDesc": "Grades, curriculum, and assessments",
+      "attendance": "Attendance",
+      "attendanceDesc": "Daily attendance tracking",
+      "timetable": "Timetable",
+      "timetableDesc": "Class schedules and substitutions",
+      "fees": "Fee Management",
+      "feesDesc": "Fee structure and billing",
+      "payments": "Payments",
+      "paymentsDesc": "Payment processing and receipts",
+      "library": "Library",
+      "libraryDesc": "Books, resources, and circulation",
+      "transport": "Transport",
+      "transportDesc": "Routes, vehicles, and tracking",
+      "hr": "Human Resources",
+      "hrDesc": "Staff management and payroll",
+      "reports": "Reports",
+      "reportsDesc": "Analytics and custom reports"
+    },
+    "recentActivity": "Recent Activity",
+    "recentActivityDesc": "Latest updates and notifications",
+    "announcements": {
+      "title": "Announcements",
+      "viewAll": "View All",
+      "noAnnouncements": "No announcements at this time"
+    },
+    "upcomingEvents": {
+      "title": "Upcoming Events",
+      "viewAll": "View Calendar",
+      "noEvents": "No upcoming events"
+    },
+    "charts": {
+      "studentEnrollment": "Student Enrollment Trend",
+      "feeCollection": "Fee Collection Overview",
+      "attendanceTrend": "Attendance Trend",
+      "admissionStatus": "Admission Applications"
+    },
+    "userMenu": {
+      "profile": "Profile",
+      "settings": "Settings",
+      "logout": "Logout",
+      "help":"Help"
+    },
+    "context": {
+      "schoolYear": "School Year",
+      "tenant": "Institution",
+      "noSchoolYear": "No school year selected",
+      "selectSchoolYear": "Select school year",
+      "searchPlaceholder": "Search school years...",
+      "loading": "Loading school years...",
+      "noResults": "No school year found.",
+      "current": "Current",
+      "allYears": "All School Years",
+      "createNew": "Create New School Year"
+    },
+    "createSchoolYearDialog": {
+      "title": "Create New School Year",
+      "description": "Add a new academic school year for your institution.",
+      "form": {
+        "name": {
+          "label": "School Year Name",
+          "placeholder": "e.g., 2024-2025"
+        },
+        "code": {
+          "label": "Code",
+          "placeholder": "e.g., SY2024"
+        },
+        "startDate": {
+          "label": "Start Date"
+        },
+        "endDate": {
+          "label": "End Date"
+        },
+        "description": {
+          "label": "Description (Optional)",
+          "placeholder": "Add additional details about this school year..."
+        }
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "create": "Create School Year",
+        "creating": "Creating..."
+      },
+      "errors": {
+        "noTenant": "No institution selected. Please select an institution first.",
+        "requiredFields": "Please fill in all required fields."
+      }
+    },
+    "loading": "Loading dashboard...",
+    "error": "Failed to load dashboard data"
+  },
+   "Layout": {
+    "tagline": "School Management System",
+    "adminAccess": "Admin Access",
+    "nav": {
+      "dashboard": "Dashboard",
+      "tenantAccessRequests": "Access Requests",
+      "schoolYearManagement": "School Years"
+    }
+  },
+  "TenantAccessRequests": {
+    "title": "Tenant Access Requests",
+    "description": "Review and manage access requests from users who want to join your institution",
+    "selectTenant": "Please select a tenant to view access requests",
+    "loading": "Loading access requests...",
+    "noRequests": "No pending access requests",
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "requestedRole": "Requested Role",
+    "requestedOn": "Requested On",
+    "message": "Message",
+    "actions": {
+      "approve": "Approve",
+      "reject": "Reject"
+    },
+    "dialog": {
+      "approveTitle": "Approve Access Request",
+      "approveDescription": "This user will be granted access to your institution with the requested role.",
+      "rejectTitle": "Reject Access Request",
+      "rejectDescription": "This user's request will be declined and they will be notified.",
+      "notesLabel": "Review Notes (Optional)",
+      "notesPlaceholder": "Add any notes about your decision...",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "processing": "Processing..."
+    }
+  }
+  
+} 

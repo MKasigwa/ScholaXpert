@@ -1,0 +1,741 @@
+{
+  "ComingSoon": {
+    "tagline": "Gestion Scolaire Professionnelle",
+    "comingSoon": "Bientôt Disponible",
+    "launchingSoon": "Lancement Prochain",
+    "heroTitle": "L'Avenir de la Gestion Scolaire",
+    "heroDescription": "Une plateforme complète de niveau entreprise conçue pour transformer les établissements éducatifs avec une automatisation intelligente, des analyses puissantes et une architecture multi-locataire transparente.",
+    "countdown": {
+      "days": "Jours",
+      "hours": "Heures",
+      "minutes": "Minutes",
+      "seconds": "Secondes"
+    },
+    "email": {
+      "placeholder": "Entrez votre email pour un accès anticipé",
+      "notifyMe": "Me Notifier",
+      "thankYou": "Merci ! Nous vous informerons lors du lancement.",
+      "waitlist": "Rejoignez plus de 5 000 éducateurs déjà sur la liste d'attente"
+    },
+    "stats": {
+      "studentsReady": "Étudiants Prêts",
+      "schoolsWaiting": "Écoles en Attente",
+      "modules": "Modules",
+      "uptimeSLA": "SLA Disponibilité"
+    },
+    "floating": {
+      "multiTenant": "Multi-Locataire",
+      "architecture": "Architecture",
+      "gdprReady": "Conforme RGPD",
+      "compliant": "Conforme"
+    },
+    "features": {
+      "sectionBadge": "Fonctionnalités",
+      "sectionTitle": "Tout ce dont vous avez besoin pour gérer votre établissement",
+      "sectionDescription": "Une suite complète de modules intégrés conçus pour les établissements éducatifs modernes",
+      "studentManagement": {
+        "title": "Gestion des Étudiants",
+        "description": "Profils étudiants complets, flux d'admission et suivi académique"
+      },
+      "smartScheduling": {
+        "title": "Planification Intelligente",
+        "description": "Emplois du temps automatisés, réservation de ressources et gestion d'événements"
+      },
+      "advancedAnalytics": {
+        "title": "Analyses Avancées",
+        "description": "Informations en temps réel, rapports de performance et tableaux de bord financiers"
+      },
+      "academicExcellence": {
+        "title": "Excellence Académique",
+        "description": "Gestion des notes, planification des programmes et ressources d'apprentissage"
+      },
+      "securityCompliance": {
+        "title": "Sécurité & Conformité",
+        "description": "Conformité RGPD, accès basé sur les rôles et journaux d'audit complets"
+      },
+      "communicationHub": {
+        "title": "Centre de Communication",
+        "description": "Portails parents, notifications et messagerie multi-canal"
+      }
+    },
+    "highlights": {
+      "comprehensiveModules": {
+        "title": "Modules Complets",
+        "description": "Plus de 15 modules intégrés couvrant tous les aspects de la gestion scolaire"
+      },
+      "modernTechnology": {
+        "title": "Technologie Moderne",
+        "description": "Construit avec une pile technologique de pointe pour performance et fiabilité"
+      },
+      "userCentricDesign": {
+        "title": "Design Centré Utilisateur",
+        "description": "Interface intuitive conçue pour les enseignants, administrateurs et parents"
+      }
+    },
+    "footer": {
+      "copyright": "© 2025 ScholaXpert. Construire l'avenir de la gestion éducative.",
+      "privacy": "Confidentialité",
+      "terms": "Conditions",
+      "contact": "Contact"
+    }
+  },
+  "SignUp": {
+    "appName": "ScholaXpert",
+    "tagline": "Créez votre compte",
+    "title": "Inscription",
+    "description": "Entrez vos informations pour créer un nouveau compte",
+    "form": {
+      "firstName": {
+        "label": "Prénom",
+        "placeholder": "Jean",
+        "required": "Le prénom est requis"
+      },
+      "lastName": {
+        "label": "Nom",
+        "placeholder": "Dupont",
+        "required": "Le nom est requis"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "vous@exemple.com",
+        "required": "L'email est requis",
+        "invalid": "Format d'email invalide",
+        "exists": "Cet email est déjà enregistré"
+      },
+      "phoneNumber": {
+        "label": "Numéro de téléphone (optionnel)",
+        "placeholder": "+33612345678"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "••••••••",
+        "required": "Le mot de passe est requis",
+        "minLength": "Le mot de passe doit contenir au moins 8 caractères",
+        "requirements": "Le mot de passe doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial",
+        "strength": {
+          "weak": "Faible",
+          "fair": "Passable",
+          "good": "Bon",
+          "strong": "Fort",
+          "veryStrong": "Très Fort"
+        }
+      },
+      "confirmPassword": {
+        "label": "Confirmer le mot de passe",
+        "placeholder": "••••••••",
+        "mismatch": "Les mots de passe ne correspondent pas"
+      }
+    },
+    "passwordRequirements": "Le mot de passe doit contenir au moins 8 caractères et inclure une majuscule, une minuscule, un chiffre et un caractère spécial.",
+    "submitButton": {
+      "creating": "Création du compte...",
+      "create": "Créer un compte"
+    },
+    "footer": {
+      "hasAccount": "Vous avez déjà un compte ?",
+      "signIn": "Se connecter"
+    },
+    "terms": "En créant un compte, vous acceptez nos Conditions d'utilisation et notre Politique de confidentialité",
+    "toast": {
+      "success": "Compte créé avec succès !",
+      "error": "Échec de l'inscription. Veuillez réessayer."
+    }
+  },
+  "SignIn": {
+    "appName": "ScholaXpert",
+    "tagline": "Bon retour ! Veuillez vous connecter pour continuer",
+    "title": "Connexion",
+    "description": "Entrez vos identifiants pour accéder à votre compte",
+    "form": {
+      "email": {
+        "label": "Email",
+        "placeholder": "vous@exemple.com",
+        "required": "L'email est requis",
+        "invalid": "Format d'email invalide"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "••••••••",
+        "required": "Le mot de passe est requis",
+        "forgotPassword": "Mot de passe oublié ?"
+      },
+      "rememberMe": "Se souvenir de moi"
+    },
+    "submitButton": {
+      "signingIn": "Connexion en cours...",
+      "signIn": "Se connecter"
+    },
+    "footer": {
+      "noAccount": "Vous n'avez pas de compte ?",
+      "signUp": "S'inscrire"
+    },
+    "demoNote": "Identifiants de démonstration : Utilisez n'importe quel email et mot de passe répondant aux exigences pour tester le système",
+    "copyright": "© 2025 ScholaXpert. Tous droits réservés.",
+    "toast": {
+      "success": "Connexion réussie !",
+      "error": "Échec de la connexion. Veuillez réessayer.",
+      "invalidCredentials": "Email ou mot de passe invalide",
+      "accountLocked": "Votre compte a été verrouillé",
+      "accountSuspended": "Votre compte a été suspendu"
+    },
+    "errors": {
+      "invalidCredentials": "Email ou mot de passe invalide",
+      "accountLocked": "Compte verrouillé",
+      "accountSuspended": "Compte suspendu"
+    }
+  },
+   "Workspace": {
+    "appName": "ScholaXpert",
+    "tagline": "Système de Gestion Scolaire Professionnel",
+    "loading": "Chargement de l'espace de travail...",
+    "welcome": {
+      "title": "Bienvenue sur ScholaXpert !",
+      "subtitle": "Pour commencer, créez votre école ou demandez l'accès à une école existante."
+    },
+    "createTenant": {
+      "badge": "Recommandé",
+      "title": "Créer Votre École",
+      "description": "Configurez une nouvelle école et devenez administrateur",
+      "button": "Créer l'École",
+      "features": {
+        "feature1": "Contrôle administratif complet",
+        "feature2": "Gestion illimitée des utilisateurs",
+        "feature3": "Accès complet aux modules",
+        "feature4": "Activation instantanée"
+      }
+    },
+    "joinTenant": {
+      "badge": "Rejoindre Existant",
+      "title": "Demander l'Accès à une École",
+      "description": "Rejoignez une école existante en soumettant une demande d'accès",
+      "button": "Demander l'Accès",
+      "features": {
+        "feature1": "Processus d'approbation rapide",
+        "feature2": "Accès basé sur les rôles",
+        "feature3": "Espace de travail collaboratif",
+        "feature4": "Vérification sécurisée"
+      }
+    },
+    "info": {
+      "multiUser": {
+        "title": "Support Multi-Utilisateurs",
+        "description": "Collaborez avec le personnel et les administrateurs en temps réel"
+      },
+      "secure": {
+        "title": "Sécurisé & Conforme",
+        "description": "Sécurité de niveau entreprise avec contrôle d'accès basé sur les rôles"
+      },
+      "flexible": {
+        "title": "Rôles Flexibles",
+        "description": "Permissions personnalisables pour différents types d'utilisateurs"
+      }
+    },
+    "footer": "En créant ou rejoignant une école, vous acceptez nos Conditions d'Utilisation et notre Politique de Confidentialité."
+  },
+  "EmailVerification": {
+    "appName": "ScholaXpert",
+    "tagline": "Système de Gestion Scolaire Professionnel",
+    "title": "Vérifiez Votre E-mail",
+    "description": "Nous avons envoyé un code de vérification à 6 chiffres à",
+    "inputLabel": "Entrez le Code de Vérification",
+    "verifyButton": "Vérifier l'E-mail",
+    "verifying": "Vérification...",
+    "didntReceive": "Vous n'avez pas reçu le code ?",
+    "resendCode": "Renvoyer le Code",
+    "resendIn": "Renvoyer dans {time}",
+    "sending": "Envoi...",
+    "backToSignIn": "Retour à la Connexion",
+    "helpText": "Besoin d'aide ? Contactez notre équipe de support.",
+    "attempts": {
+      "label": "Tentative {current} sur {max}"
+    },
+    "errors": {
+      "noEmail": "Aucun E-mail Fourni",
+      "noEmailDescription": "Veuillez vous connecter d'abord pour vérifier votre e-mail.",
+      "generic": "La vérification a échoué. Veuillez réessayer.",
+      "maxAttempts": "Nombre maximum de tentatives de vérification atteint. Veuillez demander un nouveau code."
+    },
+    "toast": {
+      "success": "E-mail vérifié avec succès !",
+      "codeSent": "Code de vérification envoyé avec succès !",
+      "resendError": "Échec du renvoi du code de vérification"
+    }
+  },
+   "CreateTenant": {
+    "title": "Créer Votre École",
+    "subtitle": "Configurez votre établissement et commencez à le gérer aujourd'hui",
+    "back": "Retour",
+    "basicInfo": {
+      "title": "Informations de Base",
+      "description": "Entrez les détails de base sur votre école"
+    },
+    "address": {
+      "title": "Adresse",
+      "description": "Emplacement physique de votre école"
+    },
+    "fields": {
+      "name": {
+        "label": "Nom de l'École",
+        "placeholder": "par ex., Lycée Greenfield"
+      },
+      "code": {
+        "label": "Code de l'École",
+        "placeholder": "par ex., GHS001"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "ecole@exemple.com"
+      },
+      "phone": {
+        "label": "Téléphone",
+        "placeholder": "+33123456789"
+      },
+      "street": {
+        "label": "Adresse de la Rue",
+        "placeholder": "123 Rue Principale"
+      },
+      "city": {
+        "label": "Ville",
+        "placeholder": "Ville"
+      },
+      "state": {
+        "label": "État/Province",
+        "placeholder": "État"
+      },
+      "country": {
+        "label": "Pays",
+        "placeholder": "Pays"
+      },
+      "postalCode": {
+        "label": "Code Postal",
+        "placeholder": "12345"
+      }
+    },
+    "buttons": {
+      "cancel": "Annuler",
+      "create": "Créer l'École",
+      "creating": "Création de l'École..."
+    },
+    "errors": {
+      "nameRequired": "Le nom de l'école est requis",
+      "codeRequired": "Le code de l'école est requis",
+      "emailRequired": "L'email est requis",
+      "emailInvalid": "Veuillez entrer un email valide",
+      "phoneRequired": "Le téléphone est requis",
+      "streetRequired": "La rue est requise",
+      "cityRequired": "La ville est requise",
+      "countryRequired": "Le pays est requis",
+      "fillRequired": "Veuillez remplir tous les champs requis",
+      "createFailed": "Échec de la création de l'école"
+    },
+    "success": {
+      "created": "École créée avec succès!"
+    }
+  },
+ "RequestAccess": {
+    "appName": "ScholaXpert",
+    "tagline": "Système de Gestion Scolaire Professionnel",
+    "title": "Demander l'Accès à une École",
+    "description": "Recherchez votre école et demandez l'accès pour rejoindre leur espace de travail",
+    "form": {
+      "tenant": {
+        "label": "Rechercher une École",
+        "placeholder": "Entrez le nom ou le code de l'école...",
+        "noResults": "Aucune école trouvée. Essayez un autre terme de recherche.",
+        "required": "Veuillez sélectionner une école"
+      },
+      "role": {
+        "label": "Rôle Demandé",
+        "required": "Veuillez sélectionner un rôle"
+      },
+      "message": {
+        "label": "Message à l'Administrateur",
+        "placeholder": "Expliquez à l'administrateur pourquoi vous souhaitez rejoindre cette école...",
+        "optional": "Optionnel",
+        "help": "Un bref message aide les administrateurs à traiter votre demande plus rapidement"
+      }
+    },
+    "roles": {
+      "staff": "Membre du Personnel",
+      "staffDescription": "Accès général du personnel avec permissions de base",
+      "teacher": "Enseignant",
+      "teacherDescription": "Accès aux outils d'enseignement, notes et gestion des étudiants",
+      "accountant": "Comptable",
+      "accountantDescription": "Accès à la gestion financière et au traitement des paiements",
+      "librarian": "Bibliothécaire",
+      "librarianDescription": "Accès à la gestion de la bibliothèque et au catalogage des livres",
+      "parent": "Parent",
+      "parentDescription": "Accès pour voir les progrès académiques et les frais de votre enfant"
+    },
+    "buttons": {
+      "cancel": "Annuler",
+      "submit": "Soumettre la Demande",
+      "submitting": "Envoi en cours..."
+    },
+    "info": {
+      "title": "Informations Importantes",
+      "point1": "Votre demande sera envoyée à l'administrateur de l'école pour examen",
+      "point2": "Vous recevrez une notification une fois votre demande approuvée ou rejetée",
+      "point3": "Assurez-vous de sélectionner le rôle correct en fonction de votre poste"
+    },
+    "errors": {
+      "tenantRequired": "Veuillez sélectionner une école",
+      "roleRequired": "Veuillez sélectionner un rôle",
+      "fillRequired": "Veuillez remplir tous les champs requis",
+      "requestFailed": "Échec de la soumission de la demande. Veuillez réessayer."
+    },
+    "toast": {
+      "success": "Demande d'accès soumise avec succès !"
+    }
+  },
+  "AccessRequestWaiting": {
+    "appName": "ScholaXpert",
+    "tagline": "Système de Gestion Scolaire Professionnel",
+    "loading": {
+      "message": "Chargement de votre demande..."
+    },
+    "noPendingRequest": {
+      "title": "Aucune Demande en Attente",
+      "description": "Vous n'avez aucune demande d'accès en attente.",
+      "requestAccessButton": "Demander l'Accès à l'Établissement",
+      "signOutButton": "Se Déconnecter"
+    },
+    "header": {
+      "title": "Demande d'Accès en Attente",
+      "description": "Votre demande est en cours d'examen par les administrateurs de l'établissement"
+    },
+    "statusAlert": {
+      "message": "Vous serez notifié par e-mail une fois que votre demande aura été examinée. Vous pouvez modifier ou annuler votre demande à tout moment."
+    },
+    "status": {
+      "pendingReview": "En Attente d'Examen",
+      "approved": "Approuvée",
+      "rejected": "Rejetée"
+    },
+    "roles": {
+      "SUPER_ADMIN": "Super Administrateur",
+      "ADMIN": "Administrateur",
+      "TEACHER": "Enseignant",
+      "STUDENT": "Étudiant",
+      "PARENT": "Parent"
+    },
+    "profileCard": {
+      "title": "Votre Profil",
+      "description": "Informations de votre compte",
+      "fullName": "Nom Complet",
+      "email": "E-mail"
+    },
+    "requestDetailsCard": {
+      "title": "Détails de la Demande",
+      "description": "Informations sur votre demande d'accès",
+      "institution": "Établissement",
+      "code": "Code",
+      "requestedRole": "Rôle Demandé",
+      "yourMessage": "Votre Message",
+      "requestedOn": "Demandé le",
+      "lastUpdated": "Dernière Mise à Jour"
+    },
+    "actionsCard": {
+      "title": "Actions",
+      "description": "Gérer votre demande d'accès",
+      "refreshStatus": "Actualiser le Statut",
+      "modifyRequest": "Modifier la Demande",
+      "cancelRequest": "Annuler la Demande",
+      "signOut": "Se Déconnecter"
+    },
+    "helpText": "Besoin d'aide ? Contactez le support à support@scholaxpert.com",
+    "editDialog": {
+      "title": "Modifier la Demande d'Accès",
+      "description": "Mettre à jour votre rôle ou votre message pour cette demande d'accès",
+      "roleLabel": "Rôle Demandé",
+      "rolePlaceholder": "Sélectionnez un rôle",
+      "messageLabel": "Message (Optionnel)",
+      "messagePlaceholder": "Expliquez aux administrateurs pourquoi vous avez besoin d'accès...",
+      "cancelButton": "Annuler",
+      "saveButton": "Enregistrer les Modifications",
+      "saving": "Enregistrement...",
+      "roles": {
+        "admin": "Administrateur",
+        "teacher": "Enseignant",
+        "student": "Étudiant",
+        "parent": "Parent"
+      }
+    },
+    "cancelDialog": {
+      "title": "Annuler la Demande d'Accès",
+      "description": "Êtes-vous sûr de vouloir annuler cette demande d'accès ? Vous pourrez soumettre une nouvelle demande plus tard.",
+      "keepButton": "Conserver la Demande",
+      "cancelButton": "Annuler la Demande",
+      "cancelling": "Annulation..."
+    },
+    "toast": {
+      "approved": "Votre demande d'accès a été approuvée !",
+      "updateSuccess": "Demande mise à jour avec succès",
+      "updateError": "Échec de la mise à jour de la demande",
+      "cancelSuccess": "Demande annulée avec succès",
+      "cancelError": "Échec de l'annulation de la demande"
+    }
+  },
+  "ForgotPassword": {
+    "appName": "ScholaXpert",
+    "tagline": "Système de Gestion Scolaire Professionnel",
+    "title": "Mot de passe oublié?",
+    "subtitle": "Entrez votre email et nous vous enverrons un code pour réinitialiser votre mot de passe",
+    "emailLabel": "Adresse e-mail",
+    "emailPlaceholder": "votre@email.com",
+    "sendCodeButton": "Envoyer le code",
+    "sendingButton": "Envoi en cours...",
+    "backToSignIn": "Retour à la connexion",
+    "helpText": "Vous vous souvenez de votre mot de passe?",
+    "success": {
+      "title": "Vérifiez votre e-mail!",
+      "message": "Nous avons envoyé un code à 6 chiffres à votre adresse e-mail",
+      "nextSteps": "Vérifiez votre boîte de réception et entrez le code sur la page suivante",
+      "continueButton": "Continuer vers la réinitialisation"
+    },
+    "errors": {
+      "emailRequired": "L'e-mail est requis",
+      "emailInvalid": "Veuillez entrer une adresse e-mail valide",
+      "sendFailed": "Échec de l'envoi du code",
+      "generic": "Une erreur s'est produite"
+    },
+    "toast": {
+      "success": "Code de réinitialisation envoyé avec succès!",
+      "error": "Échec de l'envoi du code"
+    }
+  },
+   "ResetPassword": {
+    "appName": "ScholaXpert",
+    "tagline": "Système de Gestion Scolaire Professionnel",
+    "step1": {
+      "title": "Vérifier le code",
+      "subtitle": "Entrez le code à 6 chiffres que nous avons envoyé à",
+      "inputLabel": "Code de vérification",
+      "verifyButton": "Vérifier le code",
+      "verifying": "Vérification...",
+      "resendLabel": "Vous n'avez pas reçu le code?",
+      "resendButton": "Renvoyer le code",
+      "resendIn": "Renvoyer dans {time}",
+      "sending": "Envoi...",
+      "attempts": "Tentative {current} sur {max}",
+      "attemptsError": "Nombre maximum de tentatives atteint. Veuillez demander un nouveau code."
+    },
+    "step2": {
+      "title": "Créer un nouveau mot de passe",
+      "subtitle": "Votre mot de passe doit contenir au moins 8 caractères",
+      "newPasswordLabel": "Nouveau mot de passe",
+      "newPasswordPlaceholder": "Entrez le nouveau mot de passe",
+      "confirmPasswordLabel": "Confirmer le mot de passe",
+      "confirmPasswordPlaceholder": "Confirmez le nouveau mot de passe",
+      "resetButton": "Réinitialiser le mot de passe",
+      "resetting": "Réinitialisation...",
+      "requirements": {
+        "title": "Le mot de passe doit contenir:",
+        "minLength": "Au moins 8 caractères",
+        "uppercase": "Une lettre majuscule",
+        "lowercase": "Une lettre minuscule",
+        "number": "Un chiffre",
+        "special": "Un caractère spécial (@$!%*?&)"
+      }
+    },
+    "backToSignIn": "Retour à la connexion",
+    "errors": {
+      "codeInvalid": "Code de vérification invalide",
+      "codeExpired": "Le code a expiré",
+      "passwordRequired": "Le mot de passe est requis",
+      "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères",
+      "passwordWeak": "Le mot de passe doit contenir des majuscules, des minuscules, un chiffre et un caractère spécial",
+      "passwordMismatch": "Les mots de passe ne correspondent pas",
+      "confirmRequired": "Veuillez confirmer votre mot de passe",
+      "maxAttempts": "Nombre maximum de tentatives de vérification atteint",
+      "resetFailed": "Échec de la réinitialisation du mot de passe",
+      "generic": "Une erreur s'est produite"
+    },
+    "toast": {
+      "codeVerified": "Code vérifié avec succès!",
+      "codeSent": "Nouveau code envoyé avec succès!",
+      "passwordReset": "Mot de passe réinitialisé avec succès!",
+      "error": "Une erreur s'est produite"
+    }
+  },
+  "Dashboard": {
+    "welcome": "Bienvenue",
+      "subtitle":"School Management",
+    "welcomeDesc": "Voici ce qui se passe avec votre école aujourd'hui.",
+    "tenantName": "Mon École",
+    "stats": {
+      "totalStudents": "Total des Étudiants",
+      "studentsDesc": "+12% par rapport au mois dernier",
+      "activeClasses": "Classes Actives",
+      "classesDesc": "À tous les niveaux",
+      "totalTeachers": "Personnel Enseignant",
+      "teachersDesc": "Enseignants actifs",
+      "revenue": "Revenu Mensuel",
+      "revenueDesc": "Mois en cours",
+      "attendance": "Taux de Présence",
+      "attendanceDesc": "Cette semaine",
+      "pendingAdmissions": "Admissions en Attente",
+      "admissionsDesc": "En attente d'examen",
+      "outstandingFees": "Frais Impayés",
+      "feesDesc": "En attente de collecte",
+      "libraryBooks": "Livres de Bibliothèque",
+      "booksDesc": "Collection totale"
+    },
+    "quickActions": {
+      "title": "Actions Rapides",
+      "newStudent": "Ajouter un Nouvel Étudiant",
+      "newStudentDesc": "Inscrire un nouvel étudiant",
+      "newClass": "Créer une Classe",
+      "newClassDesc": "Configurer une nouvelle classe",
+      "schedule": "Gérer l'Emploi du Temps",
+      "scheduleDesc": "Voir et modifier l'emploi du temps",
+      "reports": "Voir les Rapports",
+      "reportsDesc": "Analyses et statistiques",
+      "processPayment": "Traiter un Paiement",
+      "processPaymentDesc": "Enregistrer le paiement des frais",
+      "manageAdmissions": "Examiner les Admissions",
+      "manageAdmissionsDesc": "Traiter les candidatures",
+      "sendAnnouncement": "Envoyer une Annonce",
+      "sendAnnouncementDesc": "Notifier les parents/étudiants",
+      "manageLibrary": "Gestion de la Bibliothèque",
+      "manageLibraryDesc": "Livres et ressources"
+    },
+    "modules": {
+      "title": "Modules du Système",
+      "admission": "Admission",
+      "admissionDesc": "Inscription et candidatures des étudiants",
+      "students": "Étudiants",
+      "studentsDesc": "Profils et dossiers des étudiants",
+      "classes": "Classes",
+      "classesDesc": "Gestion et configuration des classes",
+      "academic": "Académique",
+      "academicDesc": "Notes, programme et évaluations",
+      "attendance": "Présence",
+      "attendanceDesc": "Suivi quotidien de la présence",
+      "timetable": "Emploi du Temps",
+      "timetableDesc": "Horaires des cours et remplacements",
+      "fees": "Gestion des Frais",
+      "feesDesc": "Structure des frais et facturation",
+      "payments": "Paiements",
+      "paymentsDesc": "Traitement des paiements et reçus",
+      "library": "Bibliothèque",
+      "libraryDesc": "Livres, ressources et circulation",
+      "transport": "Transport",
+      "transportDesc": "Itinéraires, véhicules et suivi",
+      "hr": "Ressources Humaines",
+      "hrDesc": "Gestion du personnel et paie",
+      "reports": "Rapports",
+      "reportsDesc": "Analyses et rapports personnalisés"
+    },
+    "recentActivity": "Activité Récente",
+    "recentActivityDesc": "Dernières mises à jour et notifications",
+    "announcements": {
+      "title": "Annonces",
+      "viewAll": "Voir Tout",
+      "noAnnouncements": "Aucune annonce pour le moment"
+    },
+    "upcomingEvents": {
+      "title": "Événements à Venir",
+      "viewAll": "Voir le Calendrier",
+      "noEvents": "Aucun événement à venir"
+    },
+    "charts": {
+      "studentEnrollment": "Tendance d'Inscription des Étudiants",
+      "feeCollection": "Aperçu de la Collecte des Frais",
+      "attendanceTrend": "Tendance de Présence",
+      "admissionStatus": "Candidatures d'Admission"
+    },
+    "userMenu": {
+      "profile": "Profil",
+      "settings": "Paramètres",
+      "logout": "Déconnexion",
+       "help":"Aide"
+    },
+    "context": {
+      "schoolYear": "Année Scolaire",
+      "tenant": "Établissement",
+      "noSchoolYear": "Aucune année scolaire sélectionnée",
+      "selectSchoolYear": "Sélectionner l'année scolaire",
+      "searchPlaceholder": "Rechercher des années scolaires...",
+      "loading": "Chargement des années scolaires...",
+      "noResults": "Aucune année scolaire trouvée.",
+      "current": "Actuel",
+      "allYears": "Toutes les Années Scolaires",
+      "createNew": "Créer une Nouvelle Année Scolaire"
+    },
+    "createSchoolYearDialog": {
+      "title": "Créer une Nouvelle Année Scolaire",
+      "description": "Ajouter une nouvelle année scolaire académique pour votre établissement.",
+      "form": {
+        "name": {
+          "label": "Nom de l'Année Scolaire",
+          "placeholder": "par ex., 2024-2025"
+        },
+        "code": {
+          "label": "Code",
+          "placeholder": "par ex., AS2024"
+        },
+        "startDate": {
+          "label": "Date de Début"
+        },
+        "endDate": {
+          "label": "Date de Fin"
+        },
+        "description": {
+          "label": "Description (Optionnel)",
+          "placeholder": "Ajouter des détails supplémentaires sur cette année scolaire..."
+        }
+      },
+      "buttons": {
+        "cancel": "Annuler",
+        "create": "Créer l'Année Scolaire",
+        "creating": "Création..."
+      },
+      "errors": {
+        "noTenant": "Aucun établissement sélectionné. Veuillez d'abord sélectionner un établissement.",
+        "requiredFields": "Veuillez remplir tous les champs obligatoires."
+      }
+    },
+    "loading": "Chargement du tableau de bord...",
+    "error": "Échec du chargement des données du tableau de bord"
+  },
+    "Layout": {
+    "tagline": "Système de Gestion Scolaire",
+    "adminAccess": "Accès Administrateur",
+    "nav": {
+      "dashboard": "Tableau de Bord",
+      "tenantAccessRequests": "Demandes d'Accès",
+      "schoolYearManagement": "Années Scolaires"
+    }
+  },
+  "TenantAccessRequests": {
+    "title": "Demandes d'Accès aux Établissements",
+    "description": "Examiner et gérer les demandes d'accès des utilisateurs qui souhaitent rejoindre votre établissement",
+    "selectTenant": "Veuillez sélectionner un établissement pour voir les demandes d'accès",
+    "loading": "Chargement des demandes d'accès...",
+    "noRequests": "Aucune demande d'accès en attente",
+    "status": {
+      "pending": "En Attente",
+      "approved": "Approuvée",
+      "rejected": "Rejetée"
+    },
+    "requestedRole": "Rôle Demandé",
+    "requestedOn": "Demandé le",
+    "message": "Message",
+    "actions": {
+      "approve": "Approuver",
+      "reject": "Rejeter"
+    },
+    "dialog": {
+      "approveTitle": "Approuver la Demande d'Accès",
+      "approveDescription": "Cet utilisateur se verra accorder l'accès à votre établissement avec le rôle demandé.",
+      "rejectTitle": "Rejeter la Demande d'Accès",
+      "rejectDescription": "La demande de cet utilisateur sera refusée et il sera notifié.",
+      "notesLabel": "Notes d'Examen (Optionnel)",
+      "notesPlaceholder": "Ajoutez des notes sur votre décision...",
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "processing": "Traitement..."
+    }
+  }
+}

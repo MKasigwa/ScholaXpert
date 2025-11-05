@@ -1,0 +1,87 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: scholaxpert-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: scholaxpert_db
+      POSTGRES_USER: scholaxpert
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d
+    networks:
+      - scholaxpert-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: scholaxpert-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - scholaxpert-network
+
+  # pgAdmin for database management
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: scholaxpert-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@scholaxpert.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - '5050:80'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - scholaxpert-network
+    depends_on:
+      - postgres
+
+  # NestJS API (development)
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: scholaxpert-backend-app
+    container_name: scholaxpert-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: scholaxpert
+      DB_PASSWORD: password
+      DB_NAME: scholaxpert_db
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: your-super-secret-jwt-key-for-development
+    ports:
+      - '3001:3001'
+      - '9229:9229' # Debug port
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - scholaxpert-network
+    depends_on:
+      - postgres
+      - redis
+
+volumes:
+  postgres_data:
+  redis_data:
+  pgadmin_data:
+
+networks:
+  scholaxpert-network:
+    driver: bridge
