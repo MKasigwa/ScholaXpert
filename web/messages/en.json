@@ -707,6 +707,36 @@
       "tenantAccessRequests": "Access Requests",
       "schoolYearManagement": "School Years"
     }
+  },
+  "TenantAccessRequests": {
+    "title": "Tenant Access Requests",
+    "description": "Review and manage access requests from users who want to join your institution",
+    "selectTenant": "Please select a tenant to view access requests",
+    "loading": "Loading access requests...",
+    "noRequests": "No pending access requests",
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "requestedRole": "Requested Role",
+    "requestedOn": "Requested On",
+    "message": "Message",
+    "actions": {
+      "approve": "Approve",
+      "reject": "Reject"
+    },
+    "dialog": {
+      "approveTitle": "Approve Access Request",
+      "approveDescription": "This user will be granted access to your institution with the requested role.",
+      "rejectTitle": "Reject Access Request",
+      "rejectDescription": "This user's request will be declined and they will be notified.",
+      "notesLabel": "Review Notes (Optional)",
+      "notesPlaceholder": "Add any notes about your decision...",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "processing": "Processing..."
+    }
   }
   
 } 

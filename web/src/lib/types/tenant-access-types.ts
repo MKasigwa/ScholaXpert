@@ -63,6 +63,8 @@ export interface AccessRequest {
   reviewNotes?: string;
   createdAt: Date;
   updatedAt: Date;
+  userFullName: string;
+  userEmail: string;
   user?: AccessRequestUser;
   tenant?: AccessRequestTenant;
 }
