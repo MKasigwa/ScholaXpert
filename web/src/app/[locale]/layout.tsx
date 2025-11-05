@@ -29,10 +29,14 @@ type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  session: any;
+  // session: any;
 };
 
-export default async function RootLayout({ children, params, session }: Props) {
+export default async function RootLayout({
+  children,
+  params,
+}: //  session
+Props) {
   // Ensure that the incoming `locale` is valid
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
