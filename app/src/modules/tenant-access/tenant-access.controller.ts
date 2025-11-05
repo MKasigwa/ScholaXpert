@@ -21,6 +21,7 @@ import { AccessRequestResponseDto } from './dto/access-request-response.dto';
 import { PaginatedResponseDto } from '../../common/dto/paginated-response.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { AccessRequestStatus } from './entities/tenant-access-request.entity';
 
 @Controller('tenant-access')
 @UseGuards(JwtAuthGuard)
@@ -60,6 +61,14 @@ export class TenantAccessController {
     @CurrentUser('userId') userId: string,
   ): Promise<AccessRequestResponseDto[]> {
     return this.tenantAccessService.getUserRequests(userId);
+  }
+
+  @Get('tenant/:tenantId/requests')
+  async getTenantByStatus(
+    @Param('tenantId') tenantId: string,
+    @Query('status') status: AccessRequestStatus,
+  ): Promise<AccessRequestResponseDto[]> {
+    return this.tenantAccessService.getTenantRequestsByStatus(tenantId, status);
   }
 
   /**

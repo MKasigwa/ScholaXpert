@@ -277,13 +277,14 @@ export class TenantAccessService {
     // Update request
     request.status = reviewDto.status;
     request.reviewedBy = reviewerId;
+    request.rejectionReason = reviewDto.reviewNotes;
     request.reviewedAt = new Date();
 
     if (reviewDto.status === AccessRequestStatus.REJECTED) {
-      if (!reviewDto.rejectionReason) {
+      if (!reviewDto.reviewNotes) {
         throw new BadRequestException('Rejection reason is required');
       }
-      request.rejectionReason = reviewDto.rejectionReason;
+      request.rejectionReason = reviewDto.reviewNotes;
     }
 
     const updated = await this.accessRequestRepository.save(request);
@@ -308,7 +309,7 @@ export class TenantAccessService {
         request.user.email,
         request.user.fullName,
         request.tenant.name,
-        reviewDto.rejectionReason || '',
+        reviewDto.reviewNotes || '',
       );
     }
 
@@ -374,6 +375,22 @@ export class TenantAccessService {
       where: {
         tenantId,
         status: AccessRequestStatus.PENDING,
+      },
+      relations: ['user', 'tenant'],
+      order: { createdAt: 'DESC' },
+    });
+
+    return requests.map((req) => AccessRequestResponseDto.fromEntity(req));
+  }
+
+  async getTenantRequestsByStatus(
+    tenantId: string,
+    status: AccessRequestStatus,
+  ): Promise<AccessRequestResponseDto[]> {
+    const requests = await this.accessRequestRepository.find({
+      where: {
+        tenantId,
+        status,
       },
       relations: ['user', 'tenant'],
       order: { createdAt: 'DESC' },

@@ -698,5 +698,44 @@
     },
     "loading": "Chargement du tableau de bord...",
     "error": "Échec du chargement des données du tableau de bord"
+  },
+    "Layout": {
+    "tagline": "Système de Gestion Scolaire",
+    "adminAccess": "Accès Administrateur",
+    "nav": {
+      "dashboard": "Tableau de Bord",
+      "tenantAccessRequests": "Demandes d'Accès",
+      "schoolYearManagement": "Années Scolaires"
+    }
+  },
+  "TenantAccessRequests": {
+    "title": "Demandes d'Accès aux Établissements",
+    "description": "Examiner et gérer les demandes d'accès des utilisateurs qui souhaitent rejoindre votre établissement",
+    "selectTenant": "Veuillez sélectionner un établissement pour voir les demandes d'accès",
+    "loading": "Chargement des demandes d'accès...",
+    "noRequests": "Aucune demande d'accès en attente",
+    "status": {
+      "pending": "En Attente",
+      "approved": "Approuvée",
+      "rejected": "Rejetée"
+    },
+    "requestedRole": "Rôle Demandé",
+    "requestedOn": "Demandé le",
+    "message": "Message",
+    "actions": {
+      "approve": "Approuver",
+      "reject": "Rejeter"
+    },
+    "dialog": {
+      "approveTitle": "Approuver la Demande d'Accès",
+      "approveDescription": "Cet utilisateur se verra accorder l'accès à votre établissement avec le rôle demandé.",
+      "rejectTitle": "Rejeter la Demande d'Accès",
+      "rejectDescription": "La demande de cet utilisateur sera refusée et il sera notifié.",
+      "notesLabel": "Notes d'Examen (Optionnel)",
+      "notesPlaceholder": "Ajoutez des notes sur votre décision...",
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "processing": "Traitement..."
+    }
   }
 }
