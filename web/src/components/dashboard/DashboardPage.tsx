@@ -397,9 +397,10 @@ export function DashboardPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    // <div className="min-h-screen bg-background">
+    <div>
       {/* Fixed Header */}
-      <DashboardHeaderNew />
+      {/* <DashboardHeaderNew /> */}
     </div>
   );
 }

@@ -698,6 +698,15 @@
     },
     "loading": "Loading dashboard...",
     "error": "Failed to load dashboard data"
+  },
+   "Layout": {
+    "tagline": "School Management System",
+    "adminAccess": "Admin Access",
+    "nav": {
+      "dashboard": "Dashboard",
+      "tenantAccessRequests": "Access Requests",
+      "schoolYearManagement": "School Years"
+    }
   }
   
 } 

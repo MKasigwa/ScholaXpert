@@ -698,5 +698,14 @@
     },
     "loading": "Chargement du tableau de bord...",
     "error": "Échec du chargement des données du tableau de bord"
+  },
+    "Layout": {
+    "tagline": "Système de Gestion Scolaire",
+    "adminAccess": "Accès Administrateur",
+    "nav": {
+      "dashboard": "Tableau de Bord",
+      "tenantAccessRequests": "Demandes d'Accès",
+      "schoolYearManagement": "Années Scolaires"
+    }
   }
 }
