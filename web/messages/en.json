@@ -737,6 +737,251 @@
       "confirm": "Confirm",
       "processing": "Processing..."
     }
+  },
+   "SchoolYearManagement": {
+    "title": "School Year Management",
+    "description": "Manage academic school years for your institution",
+    "selectTenant": "Please select a tenant to manage school years",
+    "stats": {
+      "total": "Total Years",
+      "active": "Active",
+      "draft": "Draft",
+      "archived": "Archived",
+      "deleted": "Deleted",
+      "default": "Default Year"
+    },
+    "filters": {
+      "search": "Search school years...",
+      "status": "Status",
+      "allStatuses": "All Statuses",
+      "active": "Active",
+      "draft": "Draft",
+      "archived": "Archived",
+      "showDeleted": "Show Deleted",
+      "clearFilters": "Clear Filters"
+    },
+    "table": {
+      "selectAll": "Select all",
+      "name": "Name",
+      "code": "Code",
+      "dateRange": "Date Range",
+      "status": "Status",
+      "students": "Students",
+      "classes": "Classes",
+      "isDefault": "Default",
+      "actions": "Actions",
+      "noResults": "No school years found",
+      "loading": "Loading school years...",
+      "sortBy": "Sort by"
+    },
+    "status": {
+      "active": "Active",
+      "draft": "Draft",
+      "archived": "Archived",
+      "deleted": "Deleted"
+    },
+    "actions": {
+      "create": "Create School Year",
+      "refresh": "Refresh",
+      "export": "Export",
+      "bulkActions": "Bulk Actions",
+      "view": "View Details",
+      "edit": "Edit",
+      "delete": "Delete",
+      "restore": "Restore",
+      "archive": "Archive",
+      "activate": "Activate",
+      "setDefault": "Set as Default",
+      "viewAuditLog": "View Audit Log",
+      "more": "More"
+    },
+    "form": {
+      "create": {
+        "title": "Create School Year",
+        "description": "Add a new academic year to your institution",
+        "submit": "Create School Year",
+        "submitting": "Creating..."
+      },
+      "edit": {
+        "title": "Edit School Year",
+        "description": "Update school year information",
+        "submit": "Save Changes",
+        "submitting": "Saving..."
+      },
+      "fields": {
+        "name": {
+          "label": "Year Name",
+          "placeholder": "e.g., 2024-2025",
+          "required": "Year name is required"
+        },
+        "code": {
+          "label": "Code",
+          "placeholder": "e.g., SY2024",
+          "required": "Code is required"
+        },
+        "startDate": {
+          "label": "Start Date",
+          "required": "Start date is required"
+        },
+        "endDate": {
+          "label": "End Date",
+          "required": "End date is required"
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "Add notes about this academic year..."
+        },
+        "status": {
+          "label": "Status",
+          "active": "Active",
+          "draft": "Draft",
+          "archived": "Archived"
+        },
+        "isDefault": {
+          "label": "Set as Default Year"
+        }
+      },
+      "cancel": "Cancel"
+    },
+    "details": {
+      "title": "School Year Details",
+      "overview": "Overview",
+      "statistics": "Statistics",
+      "relatedData": "Related Data",
+      "auditHistory": "Audit History",
+      "yearInfo": "Year Information",
+      "status": "Status",
+      "dateRange": "Date Range",
+      "duration": "Duration",
+      "days": "days",
+      "isDefault": "Default Year",
+      "createdBy": "Created By",
+      "createdAt": "Created At",
+      "updatedAt": "Last Updated",
+      "noDescription": "No description available",
+      "totalStudents": "Total Students",
+      "totalClasses": "Total Classes",
+      "enrolledStudents": "Enrolled Students",
+      "activeClasses": "Active Classes"
+    },
+    "delete": {
+      "title": "Delete School Year",
+      "description": "Are you sure you want to delete this school year?",
+      "warning": "This action cannot be undone. The school year will be soft-deleted and can be restored later.",
+      "cannotDelete": "Cannot delete this school year",
+      "reasons": {
+        "hasStudents": "This year has enrolled students",
+        "hasClasses": "This year has active classes",
+        "isDefault": "This is the default school year",
+        "isActive": "This year is currently active"
+      },
+      "confirm": "Yes, Delete",
+      "cancel": "Cancel",
+      "deleting": "Deleting..."
+    },
+    "restore": {
+      "title": "Restore School Year",
+      "description": "Restore this deleted school year?",
+      "confirm": "Yes, Restore",
+      "cancel": "Cancel",
+      "restoring": "Restoring..."
+    },
+    "archive": {
+      "title": "Archive School Year",
+      "description": "Archive this school year? It will be moved to archived status.",
+      "warning": "Archived years are read-only and cannot be edited.",
+      "confirm": "Yes, Archive",
+      "cancel": "Cancel",
+      "archiving": "Archiving..."
+    },
+    "setDefault": {
+      "title": "Set Default School Year",
+      "description": "Set this as the default school year?",
+      "info": "The current default year will be updated.",
+      "confirm": "Yes, Set as Default",
+      "cancel": "Cancel",
+      "setting": "Setting..."
+    },
+    "bulkActions": {
+      "title": "Bulk Actions",
+      "description": "Perform actions on {count} selected items",
+      "noSelection": "Please select at least one school year",
+      "actions": {
+        "updateStatus": "Update Status",
+        "archive": "Archive Selected",
+        "delete": "Delete Selected",
+        "export": "Export Selected"
+      },
+      "updateStatus": {
+        "title": "Update Status",
+        "selectStatus": "Select new status",
+        "confirm": "Update Status",
+        "updating": "Updating..."
+      },
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    },
+    "export": {
+      "title": "Export School Years",
+      "description": "Export school year data in your preferred format",
+      "format": {
+        "label": "Export Format",
+        "csv": "CSV",
+        "excel": "Excel (XLSX)",
+        "pdf": "PDF",
+        "json": "JSON"
+      },
+      "includeDeleted": "Include Deleted Items",
+      "includeStats": "Include Statistics",
+      "download": "Download",
+      "downloading": "Exporting...",
+      "cancel": "Cancel"
+    },
+    "auditLog": {
+      "title": "Audit Log",
+      "description": "View change history for this school year",
+      "action": "Action",
+      "user": "User",
+      "timestamp": "Timestamp",
+      "details": "Details",
+      "actions": {
+        "created": "Created",
+        "updated": "Updated",
+        "deleted": "Deleted",
+        "restored": "Restored",
+        "archived": "Archived",
+        "activated": "Activated",
+        "setDefault": "Set as Default"
+      },
+      "noLogs": "No audit logs available",
+      "close": "Close"
+    },
+    "errors": {
+      "loadFailed": "Failed to load school years",
+      "createFailed": "Failed to create school year",
+      "updateFailed": "Failed to update school year",
+      "deleteFailed": "Failed to delete school year",
+      "restoreFailed": "Failed to restore school year",
+      "archiveFailed": "Failed to archive school year",
+      "setDefaultFailed": "Failed to set default school year",
+      "noTenant": "No institution selected",
+      "invalidDates": "End date must be after start date",
+      "duplicateCode": "A school year with this code already exists",
+      "retry": "Retry"
+    },
+    "success": {
+      "created": "School year created successfully",
+      "updated": "School year updated successfully",
+      "deleted": "School year deleted successfully",
+      "restored": "School year restored successfully",
+      "archived": "School year archived successfully",
+      "setDefault": "Default school year updated",
+      "refreshed": "School years refreshed successfully"
+    },
+    "permissions": {
+      "noAccess": "You don't have permission to manage school years",
+      "readOnly": "You have read-only access to school years"
+    }
   }
   
 } 

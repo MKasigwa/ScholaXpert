@@ -737,5 +737,250 @@
       "confirm": "Confirmer",
       "processing": "Traitement..."
     }
+  },
+   "SchoolYearManagement": {
+    "title": "Gestion des Années Scolaires",
+    "description": "Gérer les années scolaires académiques pour votre établissement",
+    "selectTenant": "Veuillez sélectionner un établissement pour gérer les années scolaires",
+    "stats": {
+      "total": "Total des Années",
+      "active": "Actives",
+      "draft": "Brouillon",
+      "archived": "Archivées",
+      "deleted": "Supprimées",
+      "default": "Année par Défaut"
+    },
+    "filters": {
+      "search": "Rechercher des années scolaires...",
+      "status": "Statut",
+      "allStatuses": "Tous les Statuts",
+      "active": "Active",
+      "draft": "Brouillon",
+      "archived": "Archivée",
+      "showDeleted": "Afficher Supprimées",
+      "clearFilters": "Effacer les Filtres"
+    },
+    "table": {
+      "selectAll": "Tout sélectionner",
+      "name": "Nom",
+      "code": "Code",
+      "dateRange": "Période",
+      "status": "Statut",
+      "students": "Élèves",
+      "classes": "Classes",
+      "isDefault": "Par Défaut",
+      "actions": "Actions",
+      "noResults": "Aucune année scolaire trouvée",
+      "loading": "Chargement des années scolaires...",
+      "sortBy": "Trier par"
+    },
+    "status": {
+      "active": "Active",
+      "draft": "Brouillon",
+      "archived": "Archivée",
+      "deleted": "Supprimée"
+    },
+    "actions": {
+      "create": "Créer une Année Scolaire",
+      "refresh": "Actualiser",
+      "export": "Exporter",
+      "bulkActions": "Actions Groupées",
+      "view": "Voir les Détails",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "restore": "Restaurer",
+      "archive": "Archiver",
+      "activate": "Activer",
+      "setDefault": "Définir par Défaut",
+      "viewAuditLog": "Voir l'Historique",
+      "more": "Plus"
+    },
+    "form": {
+      "create": {
+        "title": "Créer une Année Scolaire",
+        "description": "Ajouter une nouvelle année académique à votre établissement",
+        "submit": "Créer l'Année Scolaire",
+        "submitting": "Création..."
+      },
+      "edit": {
+        "title": "Modifier l'Année Scolaire",
+        "description": "Mettre à jour les informations de l'année scolaire",
+        "submit": "Enregistrer les Modifications",
+        "submitting": "Enregistrement..."
+      },
+      "fields": {
+        "name": {
+          "label": "Nom de l'Année",
+          "placeholder": "ex., 2024-2025",
+          "required": "Le nom de l'année est requis"
+        },
+        "code": {
+          "label": "Code",
+          "placeholder": "ex., AS2024",
+          "required": "Le code est requis"
+        },
+        "startDate": {
+          "label": "Date de Début",
+          "required": "La date de début est requise"
+        },
+        "endDate": {
+          "label": "Date de Fin",
+          "required": "La date de fin est requise"
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "Ajouter des notes sur cette année académique..."
+        },
+        "status": {
+          "label": "Statut",
+          "active": "Active",
+          "draft": "Brouillon",
+          "archived": "Archivée"
+        },
+        "isDefault": {
+          "label": "Définir comme Année par Défaut"
+        }
+      },
+      "cancel": "Annuler"
+    },
+    "details": {
+      "title": "Détails de l'Année Scolaire",
+      "overview": "Aperçu",
+      "statistics": "Statistiques",
+      "relatedData": "Données Associées",
+      "auditHistory": "Historique d'Audit",
+      "yearInfo": "Informations sur l'Année",
+      "status": "Statut",
+      "dateRange": "Période",
+      "duration": "Durée",
+      "days": "jours",
+      "isDefault": "Année par Défaut",
+      "createdBy": "Créé par",
+      "createdAt": "Créé le",
+      "updatedAt": "Dernière Mise à Jour",
+      "noDescription": "Aucune description disponible",
+      "totalStudents": "Total des Élèves",
+      "totalClasses": "Total des Classes",
+      "enrolledStudents": "Élèves Inscrits",
+      "activeClasses": "Classes Actives"
+    },
+    "delete": {
+      "title": "Supprimer l'Année Scolaire",
+      "description": "Êtes-vous sûr de vouloir supprimer cette année scolaire ?",
+      "warning": "Cette action ne peut pas être annulée. L'année scolaire sera supprimée de manière réversible et pourra être restaurée plus tard.",
+      "cannotDelete": "Impossible de supprimer cette année scolaire",
+      "reasons": {
+        "hasStudents": "Cette année a des élèves inscrits",
+        "hasClasses": "Cette année a des classes actives",
+        "isDefault": "Ceci est l'année scolaire par défaut",
+        "isActive": "Cette année est actuellement active"
+      },
+      "confirm": "Oui, Supprimer",
+      "cancel": "Annuler",
+      "deleting": "Suppression..."
+    },
+    "restore": {
+      "title": "Restaurer l'Année Scolaire",
+      "description": "Restaurer cette année scolaire supprimée ?",
+      "confirm": "Oui, Restaurer",
+      "cancel": "Annuler",
+      "restoring": "Restauration..."
+    },
+    "archive": {
+      "title": "Archiver l'Année Scolaire",
+      "description": "Archiver cette année scolaire ? Elle sera déplacée vers le statut archivé.",
+      "warning": "Les années archivées sont en lecture seule et ne peuvent pas être modifiées.",
+      "confirm": "Oui, Archiver",
+      "cancel": "Annuler",
+      "archiving": "Archivage..."
+    },
+    "setDefault": {
+      "title": "Définir l'Année Scolaire par Défaut",
+      "description": "Définir ceci comme année scolaire par défaut ?",
+      "info": "L'année par défaut actuelle sera mise à jour.",
+      "confirm": "Oui, Définir par Défaut",
+      "cancel": "Annuler",
+      "setting": "Définition..."
+    },
+    "bulkActions": {
+      "title": "Actions Groupées",
+      "description": "Effectuer des actions sur {count} éléments sélectionnés",
+      "noSelection": "Veuillez sélectionner au moins une année scolaire",
+      "actions": {
+        "updateStatus": "Mettre à Jour le Statut",
+        "archive": "Archiver la Sélection",
+        "delete": "Supprimer la Sélection",
+        "export": "Exporter la Sélection"
+      },
+      "updateStatus": {
+        "title": "Mettre à Jour le Statut",
+        "selectStatus": "Sélectionner le nouveau statut",
+        "confirm": "Mettre à Jour le Statut",
+        "updating": "Mise à jour..."
+      },
+      "confirm": "Confirmer",
+      "cancel": "Annuler"
+    },
+    "export": {
+      "title": "Exporter les Années Scolaires",
+      "description": "Exporter les données des années scolaires dans votre format préféré",
+      "format": {
+        "label": "Format d'Export",
+        "csv": "CSV",
+        "excel": "Excel (XLSX)",
+        "pdf": "PDF",
+        "json": "JSON"
+      },
+      "includeDeleted": "Inclure les Éléments Supprimés",
+      "includeStats": "Inclure les Statistiques",
+      "download": "Télécharger",
+      "downloading": "Exportation...",
+      "cancel": "Annuler"
+    },
+    "auditLog": {
+      "title": "Journal d'Audit",
+      "description": "Voir l'historique des modifications pour cette année scolaire",
+      "action": "Action",
+      "user": "Utilisateur",
+      "timestamp": "Horodatage",
+      "details": "Détails",
+      "actions": {
+        "created": "Créé",
+        "updated": "Mis à Jour",
+        "deleted": "Supprimé",
+        "restored": "Restauré",
+        "archived": "Archivé",
+        "activated": "Activé",
+        "setDefault": "Défini par Défaut"
+      },
+      "noLogs": "Aucun journal d'audit disponible",
+      "close": "Fermer"
+    },
+    "errors": {
+      "loadFailed": "Échec du chargement des années scolaires",
+      "createFailed": "Échec de la création de l'année scolaire",
+      "updateFailed": "Échec de la mise à jour de l'année scolaire",
+      "deleteFailed": "Échec de la suppression de l'année scolaire",
+      "restoreFailed": "Échec de la restauration de l'année scolaire",
+      "archiveFailed": "Échec de l'archivage de l'année scolaire",
+      "setDefaultFailed": "Échec de la définition de l'année scolaire par défaut",
+      "noTenant": "Aucun établissement sélectionné",
+      "invalidDates": "La date de fin doit être postérieure à la date de début",
+      "duplicateCode": "Une année scolaire avec ce code existe déjà",
+      "retry": "Réessayer"
+    },
+    "success": {
+      "created": "Année scolaire créée avec succès",
+      "updated": "Année scolaire mise à jour avec succès",
+      "deleted": "Année scolaire supprimée avec succès",
+      "restored": "Année scolaire restaurée avec succès",
+      "archived": "Année scolaire archivée avec succès",
+      "setDefault": "Année scolaire par défaut mise à jour",
+      "refreshed": "Années scolaires actualisées avec succès"
+    },
+    "permissions": {
+      "noAccess": "Vous n'avez pas la permission de gérer les années scolaires",
+      "readOnly": "Vous avez un accès en lecture seule aux années scolaires"
+    }
   }
 }

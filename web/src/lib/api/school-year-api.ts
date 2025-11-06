@@ -50,10 +50,9 @@ export class SchoolYearApi {
   static async getAllSchoolYears(
     params?: SchoolYearQueryParams
   ): Promise<SchoolYearListResponse> {
-    const response: AxiosResponse<SchoolYearListResponse> = await api.get(
-      this.baseUrl,
-      { params: this.cleanParams(params) }
-    );
+    const response: AxiosResponse<SchoolYearListResponse> = await api
+      .get(this.baseUrl, { params: this.cleanParams(params) })
+      .then((res) => res.data);
     return response.data;
   }
 
