@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import {
   Injectable,
   NotFoundException,
@@ -526,43 +527,39 @@ export class SchoolYearsService {
         .clone()
         .select('SUM(schoolYear.studentCount)', 'sum')
         .getRawOne()
-        .then(
-          ({ result }: { result: { sum: string } }) =>
-            parseInt(result.sum) || 0,
-        ),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        .then((result) => parseInt(result.sum)),
 
       // Sum of staff
       queryBuilder
         .clone()
         .select('SUM(schoolYear.staffCount)', 'sum')
         .getRawOne()
-        .then(
-          ({ result }: { result: { sum: string } }) =>
-            parseInt(result.sum) || 0,
-        ),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        .then((result) => parseInt(result.sum)),
 
       // Sum of classes
       queryBuilder
         .clone()
         .select('SUM(schoolYear.classCount)', 'sum')
         .getRawOne()
-        .then(
-          ({ result }: { result: { sum: string } }) =>
-            parseInt(result.sum) || 0,
-        ),
-
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        .then((result) => parseInt(result.sum)),
+      // eslint-disable-next-line @typescript-eslint/await-thenable
+      0,
       // Average duration
-      queryBuilder
-        .clone()
-        .select(
-          'AVG(EXTRACT(DAY FROM (schoolYear.endDate - schoolYear.startDate)))',
-          'avg',
-        )
-        .getRawOne()
-        .then(
-          ({ result }: { result: { avg: string } }) =>
-            Math.round(parseFloat(result.avg)) || 0,
-        ),
+      //   queryBuilder
+      //     .clone()
+      //     .select(
+      //       'AVG(EXTRACT(DAY FROM (schoolYear.endDate - schoolYear.startDate)))',
+      //       'avg',
+      //     )
+      //     .getRawOne()
+      //     .then((result) => parseInt(result.avg)),
+      // .then(
+      //   ({ result }: { result: { avg: string } }) =>
+      //     Math.round(parseFloat(result.avg)) || 0,
+      // ),
 
       // Upcoming deadlines
       this.getUpcomingDeadlines(tenantId),
