@@ -73,7 +73,7 @@ import type {
 
 // Import sub-components from the React project (we'll use them as-is for now)
 // import { SchoolYearForm } from "../../components/schoolYear/SchoolYearForm";
-// import { SchoolYearDetails } from "../../components/schoolYear/SchoolYearDetails";
+import { SchoolYearDetails } from "./SchoolYearDetails";
 // import { AuditLogViewer } from "../../components/schoolYear/AuditLogViewer";
 import { ExportDialog } from "./ExportDialog";
 // import { BulkActions } from "../../components/schoolYear/BulkActions";
@@ -721,16 +721,16 @@ export function SchoolYearManagementWithApi() {
           mode="edit"
           translations={t}
         />
-      )}
+      )}*/}
 
       {modals.view && selectedYear && (
         <SchoolYearDetails
           open={modals.view}
           onClose={() => closeModal("view")}
           schoolYear={selectedYear}
-          translations={t}
+          // translations={t}
         />
-      )} */}
+      )}
 
       {modals.delete && selectedYear && (
         <Alert>
@@ -826,7 +826,7 @@ export function SchoolYearManagementWithApi() {
           open={modals.export}
           onClose={() => closeModal("export")}
           data={schoolYears || []}
-          // translations={t}
+          t={t}
         />
       )}
       {/* 

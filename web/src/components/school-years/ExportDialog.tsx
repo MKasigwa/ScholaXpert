@@ -33,15 +33,80 @@ interface ExportDialogProps {
   open: boolean;
   onClose: () => void;
   data: SchoolYear[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  t?: any; // Translation function (optional)
 }
 
-export function ExportDialog({ open, onClose, data }: ExportDialogProps) {
+// Default translations (fallback for React app)
+const defaultTranslations = {
+  title: "Export School Years",
+  description: "Configure export options and download your data.",
+  format: {
+    label: "Export Format",
+    csv: "CSV (Comma Separated Values)",
+    csvDescription:
+      "Simple format compatible with most spreadsheet applications",
+    excel: "Excel (XLSX)",
+    excelDescription: "Microsoft Excel format with enhanced formatting options",
+  },
+  includeOptions: "Include Options",
+  includeAudit: "Include audit information (created/updated by, timestamps)",
+  includeDeleted: "Include deleted school years",
+  summary: {
+    ready: "Ready to export",
+    schoolYear: "school year",
+    schoolYears: "school years",
+    as: "as",
+  },
+  buttons: {
+    cancel: "Cancel",
+    export: "Export Data",
+    exporting: "Exporting...",
+  },
+  success: "Successfully exported {count} school year(s) as {format}",
+  error: "Failed to export data. Please try again.",
+  noData: "No data to export",
+};
+
+export function ExportDialog({ open, onClose, data, t }: ExportDialogProps) {
   const [exportOptions, setExportOptions] = useState<ExportOptions>({
     format: "csv",
     includeAudit: false,
     includeDeleted: false,
   });
   const [isExporting, setIsExporting] = useState(false);
+
+  // Use translations if provided, otherwise use defaults
+  const translations = t
+    ? {
+        title: t("export.title"),
+        description: t("export.description"),
+        format: {
+          label: t("export.format.label"),
+          csv: t("export.format.csv"),
+          csvDescription: t("export.format.csvDescription"),
+          excel: t("export.format.excel"),
+          excelDescription: t("export.format.excelDescription"),
+        },
+        includeOptions: t("export.includeOptions"),
+        includeAudit: t("export.includeAudit"),
+        includeDeleted: t("export.includeDeleted"),
+        summary: {
+          ready: t("export.summary.ready"),
+          schoolYear: t("export.summary.schoolYear"),
+          schoolYears: t("export.summary.schoolYears"),
+          as: t("export.summary.as"),
+        },
+        buttons: {
+          cancel: t("export.buttons.cancel"),
+          export: t("export.buttons.export"),
+          exporting: t("export.buttons.exporting"),
+        },
+        success: t("export.success"),
+        error: t("export.error"),
+        noData: t("export.summary.noData"),
+      }
+    : defaultTranslations;
 
   const downloadFile = (
     content: string | Blob,
@@ -131,7 +196,7 @@ export function ExportDialog({ open, onClose, data }: ExportDialogProps) {
       }
 
       if (exportData.length === 0) {
-        toast.error("No data to export");
+        toast.error(translations.noData);
         setIsExporting(false);
         return;
       }
@@ -166,15 +231,14 @@ export function ExportDialog({ open, onClose, data }: ExportDialogProps) {
         exportToExcel(cleanedData, `${filename}.xlsx`);
       }
 
-      toast.success(
-        `Successfully exported ${cleanedData.length} school year${
-          cleanedData.length !== 1 ? "s" : ""
-        } as ${exportOptions.format.toUpperCase()}`
-      );
+      const successMessage = translations.success
+        .replace("{count}", cleanedData.length.toString())
+        .replace("{format}", exportOptions.format.toUpperCase());
+      toast.success(successMessage);
       onClose();
     } catch (error) {
       console.error("Export error:", error);
-      toast.error("Failed to export data. Please try again.");
+      toast.error(translations.error);
     } finally {
       setIsExporting(false);
     }
@@ -192,23 +256,41 @@ export function ExportDialog({ open, onClose, data }: ExportDialogProps) {
     (f) => f.value === exportOptions.format
   );
 
+  // Get format description based on selected format
+  const getFormatDescription = () => {
+    if (exportOptions.format === "csv") {
+      return translations.format.csvDescription;
+    } else if (exportOptions.format === "xlsx") {
+      return translations.format.excelDescription;
+    }
+    return "";
+  };
+
+  // Get format label based on selected format
+  const getFormatLabel = (value: string) => {
+    if (value === "csv") {
+      return translations.format.csv;
+    } else if (value === "xlsx") {
+      return translations.format.excel;
+    }
+    return value.toUpperCase();
+  };
+
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Download className="h-5 w-5" />
-            Export School Years
+            {translations.title}
           </DialogTitle>
-          <DialogDescription>
-            Configure export options and download your data.
-          </DialogDescription>
+          <DialogDescription>{translations.description}</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6">
           {/* Format Selection */}
           <div className="space-y-2">
-            <Label>Export Format</Label>
+            <Label>{translations.format.label}</Label>
             <Select
               value={exportOptions.format}
               onValueChange={(value) =>
@@ -226,14 +308,14 @@ export function ExportDialog({ open, onClose, data }: ExportDialogProps) {
                   <SelectItem key={format.value} value={format.value}>
                     <div className="flex items-center gap-2">
                       <FileText className="h-4 w-4" />
-                      {format.label}
+                      {getFormatLabel(format.value)}
                     </div>
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
             <p className="text-xs text-muted-foreground">
-              {selectedFormat?.description}
+              {getFormatDescription()}
             </p>
           </div>
 
@@ -241,7 +323,7 @@ export function ExportDialog({ open, onClose, data }: ExportDialogProps) {
 
           {/* Include Options */}
           <div className="space-y-4">
-            <Label>Include Options</Label>
+            <Label>{translations.includeOptions}</Label>
 
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
@@ -256,7 +338,7 @@ export function ExportDialog({ open, onClose, data }: ExportDialogProps) {
                   }
                 />
                 <Label htmlFor="includeAudit" className="text-sm font-normal">
-                  Include audit information (created/updated by, timestamps)
+                  {translations.includeAudit}
                 </Label>
               </div>
 
@@ -272,7 +354,7 @@ export function ExportDialog({ open, onClose, data }: ExportDialogProps) {
                   }
                 />
                 <Label htmlFor="includeDeleted" className="text-sm font-normal">
-                  Include deleted school years
+                  {translations.includeDeleted}
                 </Label>
               </div>
             </div>
@@ -282,19 +364,23 @@ export function ExportDialog({ open, onClose, data }: ExportDialogProps) {
           <Alert>
             <Info className="h-4 w-4" />
             <AlertDescription>
-              Ready to export {getExportSummary()} school year
-              {getExportSummary() !== 1 ? "s" : ""} as{" "}
-              {exportOptions.format.toUpperCase()}.
+              {translations.summary.ready} {getExportSummary()}{" "}
+              {getExportSummary() !== 1
+                ? translations.summary.schoolYears
+                : translations.summary.schoolYear}{" "}
+              {translations.summary.as} {exportOptions.format.toUpperCase()}.
             </AlertDescription>
           </Alert>
 
           {/* Actions */}
           <div className="flex justify-end gap-2">
             <Button variant="outline" onClick={onClose}>
-              Cancel
+              {translations.buttons.cancel}
             </Button>
             <Button onClick={handleExport} disabled={isExporting}>
-              {isExporting ? "Exporting..." : "Export Data"}
+              {isExporting
+                ? translations.buttons.exporting
+                : translations.buttons.export}
             </Button>
           </div>
         </div>

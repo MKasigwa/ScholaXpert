@@ -63,6 +63,7 @@ export default async function middleware(req: NextRequest) {
   // Skip middleware for API routes, static files, and Next.js internals
   if (
     pathname.startsWith("/api/") ||
+    pathname.startsWith("/health") ||
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/static/") ||
     pathname.includes(".")

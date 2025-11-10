@@ -738,7 +738,7 @@
       "processing": "Processing..."
     }
   },
-   "SchoolYearManagement": {
+  "SchoolYearManagement": {
     "title": "School Year Management",
     "description": "Manage academic school years for your institution",
     "selectTenant": "Please select a tenant to manage school years",
@@ -923,19 +923,31 @@
     },
     "export": {
       "title": "Export School Years",
-      "description": "Export school year data in your preferred format",
+      "description": "Configure export options and download your data.",
       "format": {
         "label": "Export Format",
-        "csv": "CSV",
+        "csv": "CSV (Comma Separated Values)",
+        "csvDescription": "Simple format compatible with most spreadsheet applications",
         "excel": "Excel (XLSX)",
-        "pdf": "PDF",
-        "json": "JSON"
+        "excelDescription": "Microsoft Excel format with enhanced formatting options"
       },
-      "includeDeleted": "Include Deleted Items",
-      "includeStats": "Include Statistics",
-      "download": "Download",
-      "downloading": "Exporting...",
-      "cancel": "Cancel"
+      "includeOptions": "Include Options",
+      "includeAudit": "Include audit information (created/updated by, timestamps)",
+      "includeDeleted": "Include deleted school years",
+      "summary": {
+        "ready": "Ready to export",
+        "schoolYear": "school year",
+        "schoolYears": "school years",
+        "as": "as",
+        "noData": "No data to export"
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "export": "Export Data",
+        "exporting": "Exporting..."
+      },
+      "success": "Successfully exported {count} school year(s) as {format}",
+      "error": "Failed to export data. Please try again."
     },
     "auditLog": {
       "title": "Audit Log",

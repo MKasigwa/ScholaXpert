@@ -36,3 +36,9 @@ export const prepareExportData = (
     "Deleted By": includeAudit ? year.deletedBy : undefined,
   }));
 };
+
+export const formatDateRange = (startDate: string, endDate: string): string => {
+  const start = formatDate(startDate);
+  const end = formatDate(endDate);
+  return `${start} – ${end}`;
+};

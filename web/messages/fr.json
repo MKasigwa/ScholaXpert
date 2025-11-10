@@ -923,19 +923,31 @@
     },
     "export": {
       "title": "Exporter les Années Scolaires",
-      "description": "Exporter les données des années scolaires dans votre format préféré",
+      "description": "Configurer les options d'exportation et télécharger vos données.",
       "format": {
         "label": "Format d'Export",
-        "csv": "CSV",
+        "csv": "CSV (Valeurs Séparées par des Virgules)",
+        "csvDescription": "Format simple compatible avec la plupart des applications de feuilles de calcul",
         "excel": "Excel (XLSX)",
-        "pdf": "PDF",
-        "json": "JSON"
+        "excelDescription": "Format Microsoft Excel avec des options de formatage améliorées"
       },
-      "includeDeleted": "Inclure les Éléments Supprimés",
-      "includeStats": "Inclure les Statistiques",
-      "download": "Télécharger",
-      "downloading": "Exportation...",
-      "cancel": "Annuler"
+      "includeOptions": "Options d'Inclusion",
+      "includeAudit": "Inclure les informations d'audit (créé/modifié par, horodatages)",
+      "includeDeleted": "Inclure les années scolaires supprimées",
+      "summary": {
+        "ready": "Prêt à exporter",
+        "schoolYear": "année scolaire",
+        "schoolYears": "années scolaires",
+        "as": "en",
+        "noData": "Aucune donnée à exporter"
+      },
+      "buttons": {
+        "cancel": "Annuler",
+        "export": "Exporter les Données",
+        "exporting": "Exportation..."
+      },
+      "success": "Exportation réussie de {count} année(s) scolaire(s) en {format}",
+      "error": "Échec de l'exportation des données. Veuillez réessayer."
     },
     "auditLog": {
       "title": "Journal d'Audit",
