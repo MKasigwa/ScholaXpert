@@ -51,7 +51,9 @@ services:
   api:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
+      # dockerfile: Dockerfile.dev
+
     image: scholaxpert-backend-app
     container_name: scholaxpert-api
     restart: unless-stopped
