@@ -27,9 +27,9 @@ export const databaseConfig = registerAs<DatabaseConfig>(
     name: process.env.DB_NAME || 'scholaxpert_db',
     synchronize: process.env.NODE_ENV !== 'production',
     logging: process.env.NODE_ENV === 'development',
-    ssl:
-      process.env.NODE_ENV === 'production'
-        ? { rejectUnauthorized: false }
-        : false,
+    ssl: { rejectUnauthorized: false },
+    //   process.env.NODE_ENV === 'production'
+    //     ? { rejectUnauthorized: false }
+    //     : false,
   }),
 );

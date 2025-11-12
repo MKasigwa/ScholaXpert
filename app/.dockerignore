@@ -8,6 +8,13 @@
 
 # production
 /build
+/dist 
+
+node_modules
+.git
+dist
+*.log
+.env
 
 # misc
 .DS_Store
